@@ -1,0 +1,60 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Asynchronous	include/VK162.h	/^            Asynchronous$/;"	e	enum:VK162::SyncMode
+BUILDDIR	Makefile	/^BUILDDIR = build$/;"	m
+CC	Makefile	/^CC = g++$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -g # -Wall$/;"	m
+CROSS	Makefile	/^CROSS = arm-linux-$/;"	m
+END_OF_MESSAGE_BYTE0	include/Nmea0183.h	/^        static const char END_OF_MESSAGE_BYTE0 = '\\r';$/;"	m	class:Nmea0183
+END_OF_MESSAGE_BYTE1	include/Nmea0183.h	/^        static const char END_OF_MESSAGE_BYTE1 = '\\n';$/;"	m	class:Nmea0183
+INC	Makefile	/^INC = -I include$/;"	m
+LIB	Makefile	/^LIB = #-pthread -lmongoclient -L lib -lboost_thread-mt -lboost_filesystem-mt -lboost_system-mt$/;"	m
+MAXIMUM_READ_BYTE_NUMBER	include/VK162.h	/^        static const int MAXIMUM_READ_BYTE_NUMBER = 255;$/;"	m	class:VK162
+Nmea0183	include/Nmea0183.h	/^class Nmea0183 {$/;"	c
+Nmea0183	src/Nmea0183.cc	/^Nmea0183::Nmea0183() {$/;"	f	class:Nmea0183
+OBJECTS	Makefile	/^OBJECTS = $(patsubst $(SRCDIR)\/%,$(BUILDDIR)\/%,$(SOURCES:.$(SRCEXT)=.o))$/;"	m
+ReceiverState	include/Nmea0183.h	/^        enum ReceiverState {$/;"	g	class:Nmea0183
+ReceivingCRCByte0	include/Nmea0183.h	/^            ReceivingCRCByte0,$/;"	e	enum:Nmea0183::ReceiverState
+ReceivingCRCByte1	include/Nmea0183.h	/^            ReceivingCRCByte1,$/;"	e	enum:Nmea0183::ReceiverState
+ReceivingEndOfMessageByte0	include/Nmea0183.h	/^            ReceivingEndOfMessageByte0,$/;"	e	enum:Nmea0183::ReceiverState
+ReceivingEndOfMessageByte1	include/Nmea0183.h	/^            ReceivingEndOfMessageByte1 $/;"	e	enum:Nmea0183::ReceiverState
+ReceivingMessage	include/Nmea0183.h	/^            ReceivingMessage,$/;"	e	enum:Nmea0183::ReceiverState
+SOURCES	Makefile	/^SOURCES = $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))$/;"	m
+SRCDIR	Makefile	/^SRCDIR = src$/;"	m
+SRCEXT	Makefile	/^SRCEXT = cc$/;"	m
+START_OF_CRC	include/Nmea0183.h	/^        static const char START_OF_CRC = '*';$/;"	m	class:Nmea0183
+START_OF_MESSAGE	include/Nmea0183.h	/^        static const char START_OF_MESSAGE = '$';$/;"	m	class:Nmea0183
+SyncMode	include/VK162.h	/^        enum SyncMode {$/;"	g	class:VK162
+Synchronous	include/VK162.h	/^            Synchronous,$/;"	e	enum:VK162::SyncMode
+TARGET	Makefile	/^TARGET = bin\/tracker$/;"	m
+VK162	include/VK162.h	/^class VK162 : Nmea0183 {$/;"	c
+VK162	src/VK162.cc	/^VK162::VK162() {$/;"	f	class:VK162
+WaitForStartOfMessage	include/Nmea0183.h	/^            WaitForStartOfMessage,$/;"	e	enum:Nmea0183::ReceiverState
+closeSerial	src/VK162.cc	/^bool VK162::closeSerial() {$/;"	f	class:VK162
+getSerialDevice	src/VK162.cc	/^std::string VK162::getSerialDevice() {$/;"	f	class:VK162
+isDataAvailable	src/VK162.cc	/^bool VK162::isDataAvailable() {$/;"	f	class:VK162
+isSerialOpen	src/VK162.cc	/^bool VK162::isSerialOpen() {$/;"	f	class:VK162
+mCRC	include/Nmea0183.h	/^        char mCRC[2];$/;"	m	class:Nmea0183
+mFields	include/Nmea0183.h	/^        std::string mFields;$/;"	m	class:Nmea0183
+mFileDescriptor	include/VK162.h	/^        int mFileDescriptor;$/;"	m	class:VK162
+mIsSerialOpen	include/VK162.h	/^        bool mIsSerialOpen;$/;"	m	class:VK162
+mOldPortSetting	include/VK162.h	/^        termios mOldPortSetting;$/;"	m	class:VK162
+mReceiverState	include/Nmea0183.h	/^        ReceiverState mReceiverState;$/;"	m	class:Nmea0183
+mSerialDeviceName	include/VK162.h	/^        std::string mSerialDeviceName;$/;"	m	class:VK162
+main	src/tracker.cc	/^int main() {$/;"	f
+onDataReceive	src/Nmea0183.cc	/^void Nmea0183::onDataReceive(char *receivedBytes, int receivedBytesCount) {$/;"	f	class:Nmea0183
+onNmeaMessageReceive	src/Nmea0183.cc	/^void Nmea0183::onNmeaMessageReceive() {$/;"	f	class:Nmea0183
+openSerial	src/VK162.cc	/^bool VK162::openSerial(VK162::SyncMode syncMode) {$/;"	f	class:VK162
+readSerial	src/VK162.cc	/^bool VK162::readSerial() {$/;"	f	class:VK162
+resetReceiver	src/Nmea0183.cc	/^void Nmea0183::resetReceiver() {$/;"	f	class:Nmea0183
+sIsDataAvailable	include/VK162.h	/^        static bool sIsDataAvailable;$/;"	m	class:VK162
+sIsDataAvailable	src/VK162.cc	/^bool VK162::sIsDataAvailable = false;$/;"	m	class:VK162	file:
+setSerialDevice	src/VK162.cc	/^void VK162::setSerialDevice(std::string device) {$/;"	f	class:VK162
+signalHandler	src/VK162.cc	/^void VK162::signalHandler(int status) {$/;"	f	class:VK162
+validateCRC	src/Nmea0183.cc	/^bool Nmea0183::validateCRC() {$/;"	f	class:Nmea0183
+~Nmea0183	src/Nmea0183.cc	/^Nmea0183::~Nmea0183() {$/;"	f	class:Nmea0183
+~VK162	src/VK162.cc	/^VK162::~VK162() {$/;"	f	class:VK162
