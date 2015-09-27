@@ -20,7 +20,7 @@ class Nmea0183 {
     private:
         enum ReceiverState {
             WaitForStartOfMessage,
-            ReceivingMessage,
+            ReceivingFields,
             ReceivingCRCByte0,
             ReceivingCRCByte1,
             ReceivingEndOfMessageByte0,

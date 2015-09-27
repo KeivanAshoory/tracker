@@ -3,7 +3,11 @@ CC = g++
 CFLAGS = -g -Wall
 SRCDIR = src
 BUILDDIR = build
-TARGET = bin/tracker
+ifndef CROSS
+	TARGET = bin/tracker
+else
+	TARGET = /opt/FriendlyARM/mini2440/rootfs_qtopia_qt4/opt/share/tracker/bin/tracker
+endif
 
 SRCEXT = cc
 SOURCES = $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))

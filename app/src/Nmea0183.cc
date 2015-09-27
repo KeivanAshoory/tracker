@@ -37,26 +37,28 @@ void Nmea0183::onDataReceive(char *receivedBytes, int receivedBytesCount) {
         //Process received bytes one by one
         switch(mReceiverState) {
             case WaitForStartOfMessage:
+                //cout << "Nmea0183::onDataReceive: WaitForStartOfMessage" << endl;
                 switch(receivedBytes[i]) {
                     case START_OF_MESSAGE:
                         //TODO what if this $ belongs to CRC?!
                         mFields.clear();
-                        mReceiverState = ReceivingMessage;
+                        mReceiverState = ReceivingFields;
                         break;
                     default:
                         cout << "WaitForStartOfMessage:\
-                            Unexpected data received!";
+                            Unexpected data received!" << endl;
                         //TODO that's it?  
                         break;
                 }
                 break;
-            case ReceivingMessage:
+            case ReceivingFields:
+                //cout << "Nmea0183::onDataReceive: ReceivingFields" << endl;
                 switch(receivedBytes[i]) {
                     case START_OF_MESSAGE:
                         //Received $ while receiving fields! Lets reset!
                         //TODO That's it? Just reset?!
                         mFields.clear(); 
-                        mReceiverState = ReceivingMessage;
+                        mReceiverState = ReceivingFields;
                         break;
                     case START_OF_CRC:
                         //End of fields
@@ -76,16 +78,19 @@ void Nmea0183::onDataReceive(char *receivedBytes, int receivedBytesCount) {
 
                 break;
             case ReceivingCRCByte0:
+                //cout << "Nmea0183::onDataReceive: ReceivingCRCByte0" << endl;
                 //I reckon we basically should expect any character here.
                 mCRC[0] = receivedBytes[i];
                 mReceiverState = ReceivingCRCByte1; 
                 break;
              case ReceivingCRCByte1:
+                //cout << "Nmea0183::onDataReceive: ReceivingCRCByte1" << endl;
                 //I reckon we basically should expect any character here.
                 mCRC[1] = receivedBytes[i];
                 mReceiverState = ReceivingEndOfMessageByte0;
                 break;
             case ReceivingEndOfMessageByte0:
+                //cout << "Nmea0183::onDataReceive: ReceivingEndOfMessageByte0" << endl;
                 switch(receivedBytes[i]) {
                     case END_OF_MESSAGE_BYTE0:
                         mReceiverState = ReceivingEndOfMessageByte1;
@@ -94,7 +99,7 @@ void Nmea0183::onDataReceive(char *receivedBytes, int receivedBytesCount) {
                         //Received $ while receiving EOF! Lets reset.
                         //TODO That's it? Just reset?!
                         mFields.clear(); 
-                        mReceiverState = ReceivingMessage;
+                        mReceiverState = ReceivingFields;
                         break;
                    default:
                         //Ignore the current message 
@@ -105,6 +110,7 @@ void Nmea0183::onDataReceive(char *receivedBytes, int receivedBytesCount) {
                 mReceiverState = ReceivingEndOfMessageByte1;
                 break;
             case ReceivingEndOfMessageByte1:
+                //cout << "Nmea0183::onDataReceive: ReceivingEndOfMessageByte1" << endl;
                 switch(receivedBytes[i]) {
                     case END_OF_MESSAGE_BYTE1:
                         //A whole message received, check CRC.
@@ -121,7 +127,7 @@ void Nmea0183::onDataReceive(char *receivedBytes, int receivedBytesCount) {
                         //Received $ while receiving EOF! Lets reset.
                         //TODO That's it? Just reset?!
                         mFields.clear(); 
-                        mReceiverState = ReceivingMessage;
+                        mReceiverState = ReceivingFields;
                         break;
                     default:
                         //Ignore the current message 
@@ -131,6 +137,7 @@ void Nmea0183::onDataReceive(char *receivedBytes, int receivedBytesCount) {
 
                 break;
             default:
+                cout << "Nmea0183::onDataReceive: Unknown status!" << endl;
                 //TODO WTF?!
                 break;
         }
@@ -143,10 +150,13 @@ void Nmea0183::resetReceiver() {
 }
 
 void Nmea0183::onNmeaMessageReceive() {
+    //if(mFields.substr(0,5)=="GPRMC") {
+        cout << "Nmea0183::onNmeaMessageReceive: " << mFields << endl;
+    //}
     //Write code!
 }
 
 bool Nmea0183::validateCRC() {
     //TODO write code!!
-    return false;
+    return true;
 }

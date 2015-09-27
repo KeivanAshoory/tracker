@@ -26,7 +26,7 @@
 #include <VK162.h>
 
 
-bool VK162::sIsDataAvailable = false;
+bool VK162::sIsDataAvailable = false;   //TODO sig_atomic_t??
 
 using namespace std;
 
@@ -50,16 +50,18 @@ VK162::~VK162() {
 bool VK162::openSerial(VK162::SyncMode syncMode) {
     if(mIsSerialOpen) {
         //TODO: do something!
+        cout << "Serial port is already open!" << endl;
         return false;
     }
 
     if(mSerialDeviceName.empty()) {
         //TODO: do something!
+        cout << "Device name is empty!" << endl;
         return false;
     }
 
     switch(syncMode) {
-        case Synchronous:
+        case Asynchronous:
             mFileDescriptor = open(mSerialDeviceName.c_str(),
                     O_RDWR | O_NOCTTY | O_NONBLOCK);
             if(mFileDescriptor >= 0) {
@@ -75,18 +77,21 @@ bool VK162::openSerial(VK162::SyncMode syncMode) {
                 //allow the process to receive SIGIO
                 if(fcntl(mFileDescriptor, F_SETOWN, getpid()) < 0) {
                     //TODO:
+                    cout << "Failed to set the owner of file descriptor!" << endl;
                     return false;
                 }
 
                 //makes the file descriptor asynchronous
                 if(fcntl(mFileDescriptor, F_SETFL, FASYNC) < 0) {
                     //TODO
+                    cout << "Failed to make file descriptor asynchronous!" << endl;
                     return false;
                 }
 
                 //save the current setting of the serial port
                 if(tcgetattr(mFileDescriptor, &mOldPortSetting) < 0) {
                     //TODO
+                    cout << "Failed to get serial port setting!" << endl;
                     return false;
                 }
 
@@ -105,12 +110,14 @@ bool VK162::openSerial(VK162::SyncMode syncMode) {
                 //flush the port input buffer
                 if(tcflush(mFileDescriptor, TCIFLUSH) < 0) {
                     //TODO
+                    cout << "Failed to flush serial port!" << endl;
                     return false;
                 }
 
                 //write new setting to the port
                 if(tcsetattr(mFileDescriptor, TCSANOW, &newPortSetting) < 0) {
                     //TODO
+                    cout << "Failed to set attribute of the file descriptor!" << endl;
                     return false;
                 }
 
@@ -121,11 +128,12 @@ bool VK162::openSerial(VK162::SyncMode syncMode) {
             } else {
                 //failed to open the serial /ort
                 //TODO:
+                cout << "Failedd to open the serial port!" << endl;
                 return false;
             }
 
             break;
-        case Asynchronous:
+        case Synchronous:
             //TODO
             return false;
             break;
@@ -197,7 +205,7 @@ bool VK162::isDataAvailable() {
 }
 
 void VK162::signalHandler(int status) {
-    cout << "SIGIO received.";
+    //cout << "SIGIO received." << endl;
     sIsDataAvailable = true;
 }
 

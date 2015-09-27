@@ -49,7 +49,7 @@ class VK162 : Nmea0183 {
         std::string mSerialDeviceName;
         termios mOldPortSetting;
 
-        static bool sIsDataAvailable;
+        static bool sIsDataAvailable;   //TODO sig_atomic_t ??
         static void signalHandler(int status);
 
 
