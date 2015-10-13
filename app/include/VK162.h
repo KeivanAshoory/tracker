@@ -26,10 +26,6 @@ class VK162 : Nmea0183 {
             Asynchronous
         };
 
-     private:
-        static const int MAXIMUM_READ_BYTE_NUMBER = 255;
-
-    public:
         VK162();
         ~VK162();
 
@@ -44,6 +40,8 @@ class VK162 : Nmea0183 {
         bool readSerial();
 
     private:
+        static const int MAXIMUM_READ_BYTE_NUMBER = 255;
+
         int mFileDescriptor;
         bool mIsSerialOpen;
         std::string mSerialDeviceName;
@@ -51,9 +49,6 @@ class VK162 : Nmea0183 {
 
         static bool sIsDataAvailable;   //TODO sig_atomic_t ??
         static void signalHandler(int status);
-
-
-
 
 };
 

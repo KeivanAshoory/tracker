@@ -19,6 +19,14 @@
 #include <vector>
 
 class Nmea0183 {
+    public:
+        Nmea0183();
+        ~Nmea0183();
+
+   protected:
+        void resetReceiver();
+        void onDataReceive(char *buffer, int count);
+
     private:
         enum ReceiverState {
             WaitForStartOfMessage,
@@ -33,15 +41,6 @@ class Nmea0183 {
         static const char END_OF_MESSAGE_BYTE0 = '\r';
         static const char END_OF_MESSAGE_BYTE1 = '\n';
 
-    public:
-        Nmea0183();
-        ~Nmea0183();
-
-    protected:
-        void resetReceiver();
-        void onDataReceive(char *buffer, int count);
-
-    private:
         ReceiverState mReceiverState;
         std::string mFields;
         char mCRC[2];
