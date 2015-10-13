@@ -16,6 +16,8 @@
  * =============================================================================
  */
 
+#include <vector>
+
 class Nmea0183 {
     private:
         enum ReceiverState {
@@ -24,7 +26,7 @@ class Nmea0183 {
             ReceivingCRCByte0,
             ReceivingCRCByte1,
             ReceivingEndOfMessageByte0,
-            ReceivingEndOfMessageByte1 
+            ReceivingEndOfMessageByte1
         };
         static const char START_OF_MESSAGE = '$';
         static const char START_OF_CRC = '*';
@@ -45,7 +47,24 @@ class Nmea0183 {
         char mCRC[2];
 
         void onNmeaMessageReceive();
-        void onXMessageReceive();
+
+        void onRMCReceive(std::vector<std::string> dataFields); //TODO reference &?
+        void onVTGReceive(std::vector<std::string> dataFields);
+        void onGSVReceive(std::vector<std::string> dataFields);
+        void onGGAReceive(std::vector<std::string> dataFields);
+        void onGLLReceive(std::vector<std::string> dataFields);
+
+        void onGSAReceive(std::vector<std::string> dataFields);
+        void onMSSReceive(std::vector<std::string> dataFields);
+        void onZDAReceive(std::vector<std::string> dataFields);
+        void onPSRF140Receive(std::vector<std::string> dataFields);
+        void onPSRF150Receive(std::vector<std::string> dataFields);
+        void onPSRF151Receive(std::vector<std::string> dataFields);
+        void onPSRF152Receive(std::vector<std::string> dataFields);
+        void onPSRF154Receive(std::vector<std::string> dataFields);
+        void onPSRF155Receive(std::vector<std::string> dataFields);
 
         bool validateCRC();
+        static std::vector<std::string> parseFields(std::string fields);
+
 };

@@ -25,6 +25,7 @@ using namespace std;
 volatile static sig_atomic_t isQuitRequested = 0;
 
 void sigIntHandler(int signal) {
+    cout << endl << "Caught signal SIGINT" << endl;
     isQuitRequested = signal;
 }
 
@@ -38,7 +39,7 @@ int main() {
     if(!gps.openSerial(VK162::Asynchronous)) {
         cout << "Failed to open serial port!" << endl;
         return -1;
-    } 
+    }
 
     cout << "Serial port opened successfully." << endl;
 
@@ -51,7 +52,7 @@ int main() {
         }
     }
 
-    cout << "tracker stopped!" << endl; 
+    cout << "tracker stopped!" << endl;
 
     return 0;
 }
