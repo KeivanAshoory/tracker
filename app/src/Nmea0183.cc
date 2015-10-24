@@ -17,19 +17,20 @@
  */
 
 #include <iostream>
-#include <Nmea0183.h>
 #include <vector>
 #include <sstream>
+#include <Logger.h>
+#include <Nmea0183.h>
 
 using namespace std;
 
 Nmea0183::Nmea0183() {
-    cout << "Nmea0183:constructor" << endl;
+    Logger::info("Nmea0183:constructor");
     resetReceiver();
 }
 
 Nmea0183::~Nmea0183() {
-    cout << "Nmea0183:destructor" << endl;
+    Logger::info("Nmea0183:destructor");
     //TODO free memory or something?!
 }
 
@@ -39,7 +40,8 @@ void Nmea0183::onDataReceive(char *receivedBytes, int receivedBytesCount) {
         //Process received bytes one by one
         switch(mReceiverState) {
             case WaitForStartOfMessage:
-                //cout << "Nmea0183::onDataReceive: WaitForStartOfMessage" << endl;
+                //Logger::debug("Nmea0183::onDataReceive:
+                //WaitForStartOfMessage");
                 switch(receivedBytes[i]) {
                     case START_OF_MESSAGE:
                         //TODO what if this $ belongs to CRC?!
@@ -47,14 +49,14 @@ void Nmea0183::onDataReceive(char *receivedBytes, int receivedBytesCount) {
                         mReceiverState = ReceivingFields;
                         break;
                     default:
-                        cout << "WaitForStartOfMessage:\
-                            Unexpected data received!" << endl;
+                        Logger::error("WaitForStartOfMessage:\
+                            Unexpected data received!");
                         //TODO that's it?
                         break;
                 }
                 break;
             case ReceivingFields:
-                //cout << "Nmea0183::onDataReceive: ReceivingFields" << endl;
+                //Logger::debug("Nmea0183::onDataReceive: ReceivingFields");
                 switch(receivedBytes[i]) {
                     case START_OF_MESSAGE:
                         //Received $ while receiving fields! Lets reset!
@@ -80,19 +82,19 @@ void Nmea0183::onDataReceive(char *receivedBytes, int receivedBytesCount) {
 
                 break;
             case ReceivingCRCByte0:
-                //cout << "Nmea0183::onDataReceive: ReceivingCRCByte0" << endl;
+                //Logger::debug("Nmea0183::onDataReceive: ReceivingCRCByte0");
                 //I reckon we basically should expect any character here.
                 mCRC[0] = receivedBytes[i];
                 mReceiverState = ReceivingCRCByte1;
                 break;
              case ReceivingCRCByte1:
-                //cout << "Nmea0183::onDataReceive: ReceivingCRCByte1" << endl;
+                //Logger::debug("Nmea0183::onDataReceive: ReceivingCRCByte1");
                 //I reckon we basically should expect any character here.
                 mCRC[1] = receivedBytes[i];
                 mReceiverState = ReceivingEndOfMessageByte0;
                 break;
             case ReceivingEndOfMessageByte0:
-                //cout << "Nmea0183::onDataReceive: ReceivingEndOfMessageByte0" << endl;
+                //Logger::debug("Nmea0183::onDataReceive: ReceivingEndOfMessageByte0")
                 switch(receivedBytes[i]) {
                     case END_OF_MESSAGE_BYTE0:
                         mReceiverState = ReceivingEndOfMessageByte1;
@@ -112,7 +114,7 @@ void Nmea0183::onDataReceive(char *receivedBytes, int receivedBytesCount) {
                 mReceiverState = ReceivingEndOfMessageByte1;
                 break;
             case ReceivingEndOfMessageByte1:
-                //cout << "Nmea0183::onDataReceive: ReceivingEndOfMessageByte1" << endl;
+                //Logger::debug("Nmea0183::onDataReceive: ReceivingEndOfMessageByte1");
                 switch(receivedBytes[i]) {
                     case END_OF_MESSAGE_BYTE1:
                         //A whole message received, check CRC.
@@ -139,7 +141,7 @@ void Nmea0183::onDataReceive(char *receivedBytes, int receivedBytesCount) {
 
                 break;
             default:
-                cout << "Nmea0183::onDataReceive: Unknown status!" << endl;
+                Logger::error("Nmea0183::onDataReceive: Unknown status!");
                 //TODO WTF?!
                 break;
         }
@@ -152,15 +154,7 @@ void Nmea0183::resetReceiver() {
 }
 
 void Nmea0183::onNmeaMessageReceive() {
-    //cout << "Nmea0183::onNmeaMessageReceive: " << mFields << endl;
-
     vector<string> fields = parseFields(mFields);   //TODO conside queue
-
-
-    //cout << "Fileds: " << endl;
-    //for(vector<string>::iterator it = fields.begin(); it != fields.end(); it++) {
-    //    cout << *it << "\t" << endl;
-    //}
 
     string messageType = fields.front();
     vector<string> dataFields(fields.begin() + 1, fields.end());
@@ -195,93 +189,92 @@ void Nmea0183::onNmeaMessageReceive() {
         onPSRF155Receive(dataFields);
     } else {
         //TODO That's it?
-        cout << "Unknown NMEA Message: " << messageType << "!" << endl;
+        Logger::error("Unknown NMEA Message");
     }
 }
 
 void Nmea0183::onGGAReceive(std::vector<std::string> dataFields) {
-    cout << "onGGAReceive" << endl;
-    cout << "Fields: ";
+    Logger::info("onGGAReceive");
+    string msg = "Fields: ";
     for(vector<string>::iterator it = dataFields.begin(); it != dataFields.end(); it++) {
-        cout << *it << "  ";
+        msg += *it;
+        msg += "  ";
     }
-    cout << endl;
-
-
+    Logger::info(msg);
 
 }
 
 void Nmea0183::onVTGReceive(std::vector<std::string> dataFields) {
-    cout << "onVTGReceive" << endl;
-    cout << "Fields: ";
+    Logger::info("onVTGReceive");
+    string msg = "Fields: ";
     for(vector<string>::iterator it = dataFields.begin(); it != dataFields.end(); it++) {
-        cout << *it << "  ";
+        msg += *it;
+        msg += "  ";
     }
-    cout << endl;
-
+    Logger::info(msg);
 
 }
 
 void Nmea0183::onRMCReceive(std::vector<std::string> dataFields) {
-    cout << "onRMCReceive" << endl;
-    cout << "Fields: ";
+    Logger::info("onRMCReceive");
+    string msg = "Fields: ";
     for(vector<string>::iterator it = dataFields.begin(); it != dataFields.end(); it++) {
-        cout << *it << "  ";
+        msg += *it;
+        msg += "  ";
     }
-    cout << endl;
-
+    Logger::info(msg);
 
 }
 
 void Nmea0183::onGSVReceive(std::vector<std::string> dataFields) {
-    cout << "onGSVReceive" << endl;
-    cout << "Fields: ";
+    Logger::info("onGSVReceive");
+    string msg = "Fields: ";
     for(vector<string>::iterator it = dataFields.begin(); it != dataFields.end(); it++) {
-        cout << *it << "  ";
+        msg += *it;
+        msg += "  ";
     }
-    cout << endl;
-
+    Logger::info(msg);
 
 }
 
 void Nmea0183::onGLLReceive(std::vector<std::string> dataFields) {
-    cout << "onGLLReceive" << endl;
+    Logger::info("onGLLReceive");
 }
 
 void Nmea0183::onGSAReceive(std::vector<std::string> dataFields)  {
-    cout << "onGSAReceive" << endl;
+    Logger::info("onGSAReceive");
 }
 
 void Nmea0183::onMSSReceive(std::vector<std::string> dataFields) {
-    cout << "onMSSReceive" << endl;
+    Logger::info("onMSSReceive");
 }
 
 void Nmea0183::onZDAReceive(std::vector<std::string> dataFields) {
-    cout << "onZDAReceive" << endl;
+    Logger::info("onZDAReceive");
 }
 
 void Nmea0183::onPSRF140Receive(std::vector<std::string> dataFields) {
-    cout << "onPSRF140Receive" << endl;
+    Logger::info("onPSRF140Receive");
 }
 
 void Nmea0183::onPSRF150Receive(std::vector<std::string> dataFields) {
-    cout << "onPSRF150Receive" << endl;
+    Logger::info("onPSRF150Receive");
 }
 
 void Nmea0183::onPSRF151Receive(std::vector<std::string> dataFields) {
-    cout << "onPSRF151Receive" << endl;
+    Logger::info("onPSRF151Receive");
 }
 
 void Nmea0183::onPSRF152Receive(std::vector<std::string> dataFields) {
-    cout << "onPSRF152Receive" << endl;
+    Logger::info("onPSRF152Receive");
 }
 
 void Nmea0183::onPSRF154Receive(std::vector<std::string> dataFields) {
-    cout << "onPSRF154Receive" << endl;
+    Logger::info("onPSRF154Receive");
 }
 
 void Nmea0183::onPSRF155Receive(std::vector<std::string> dataFields) {
-    cout << "onPSRF155Receive" << endl;
+    Logger::info("onPSRF155Receive");
 }
 
 bool Nmea0183::validateCRC() {
