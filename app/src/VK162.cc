@@ -26,19 +26,20 @@
 #include <Logger.h>
 #include <VK162.h>
 
+using namespace std;
 
 bool VK162::sIsDataAvailable = false;   //TODO sig_atomic_t??
 
-using namespace std;
-
-VK162::VK162() {
+VK162::VK162()
+{
     Logger::info("VK162::constructor");
     mIsSerialOpen = false;
     VK162::sIsDataAvailable = false;
     mSerialDeviceName = "";
 }
 
-VK162::~VK162() {
+VK162::~VK162()
+{
     Logger::info("VK162::destructor");
     if(mIsSerialOpen) {
         if(!closeSerial()) {
@@ -48,7 +49,8 @@ VK162::~VK162() {
     }
 }
 
-bool VK162::openSerial(VK162::SyncMode syncMode) {
+bool VK162::openSerial(VK162::SyncMode syncMode)
+{
     if(mIsSerialOpen) {
         //TODO: do something!
         Logger::error("Serial port is already open!");
@@ -129,7 +131,7 @@ bool VK162::openSerial(VK162::SyncMode syncMode) {
             } else {
                 //failed to open the serial /ort
                 //TODO:
-                Logger::error("Failedd to open the serial port!");
+                Logger::error("Failed to open the serial port!");
                 return false;
             }
 
@@ -146,7 +148,8 @@ bool VK162::openSerial(VK162::SyncMode syncMode) {
 
 }
 
-bool VK162::closeSerial() {
+bool VK162::closeSerial()
+{
     if(!mIsSerialOpen) {
         //TODO: do something!
         return false;
@@ -165,7 +168,8 @@ bool VK162::closeSerial() {
     return true;
 }
 
-bool VK162::readSerial() {
+bool VK162::readSerial()
+{
     if(!mIsSerialOpen) {
         //TODO: do something!
         return false;
@@ -187,27 +191,30 @@ bool VK162::readSerial() {
     return true;
 }
 
-void VK162::setSerialDevice(std::string device) {
+void VK162::setSerialDevice(std::string device)
+{
     mSerialDeviceName = device;
 }
 
-std::string VK162::getSerialDevice() {
+std::string VK162::getSerialDevice()
+{
     return mSerialDeviceName;
 }
 
-bool VK162::isSerialOpen() {
+bool VK162::isSerialOpen()
+{
     return mIsSerialOpen;
 }
 
-bool VK162::isDataAvailable() {
+bool VK162::isDataAvailable()
+{
     //TODO convert to inline function?
     //TODO the variable is static, and the method is not!!
     return VK162::sIsDataAvailable;
 }
 
-void VK162::signalHandler(int status) {
+void VK162::signalHandler(int status)
+{
     //Logger::debug("SIGIO received.");
     sIsDataAvailable = true;
 }
-
-

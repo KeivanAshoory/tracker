@@ -19,7 +19,8 @@
 #include <termios.h>
 #include <Nmea0183.h>
 
-class VK162 : Nmea0183 {
+class VK162 : Nmea0183
+{
      public:
         enum SyncMode {
             Synchronous,
@@ -49,6 +50,4 @@ class VK162 : Nmea0183 {
 
         static bool sIsDataAvailable;   //TODO sig_atomic_t ??
         static void signalHandler(int status);
-
 };
-

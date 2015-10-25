@@ -16,24 +16,26 @@
  * =============================================================================
  */
 
-#include <Logger.h>
 #include <iostream>
 #include <signal.h>
 #include <unistd.h>
+#include <Logger.h>
 #include <VK162.h>
 
 using namespace std;
 
 volatile static sig_atomic_t isQuitRequested = 0;
 
-void sigIntHandler(int signal) {
+void sigIntHandler(int signal)
+{
     if(Logger::isInitialised()) {
         Logger::info("Caught signal SIGINT");
     }
     isQuitRequested = signal;
 }
 
-int main() {
+int main()
+{
     signal(SIGINT, sigIntHandler);
 
     Logger::init(Logger::DESTINATION_SYSLOG,    //Use Linux syslog
@@ -65,4 +67,3 @@ int main() {
 
     return 0;
 }
-

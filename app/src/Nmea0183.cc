@@ -24,18 +24,20 @@
 
 using namespace std;
 
-Nmea0183::Nmea0183() {
+Nmea0183::Nmea0183()
+{
     Logger::info("Nmea0183:constructor");
     resetReceiver();
 }
 
-Nmea0183::~Nmea0183() {
+Nmea0183::~Nmea0183()
+{
     Logger::info("Nmea0183:destructor");
     //TODO free memory or something?!
 }
 
-void Nmea0183::onDataReceive(char *receivedBytes, int receivedBytesCount) {
-
+void Nmea0183::onDataReceive(char *receivedBytes, int receivedBytesCount)
+{
     for(int i = 0; i < receivedBytesCount; i++) {
         //Process received bytes one by one
         switch(mReceiverState) {
@@ -148,12 +150,14 @@ void Nmea0183::onDataReceive(char *receivedBytes, int receivedBytesCount) {
     }
 }
 
-void Nmea0183::resetReceiver() {
+void Nmea0183::resetReceiver()
+{
     mReceiverState = WaitForStartOfMessage;
     //TODO free memory or something?!
 }
 
-void Nmea0183::onNmeaMessageReceive() {
+void Nmea0183::onNmeaMessageReceive()
+{
     vector<string> fields = parseFields(mFields);   //TODO conside queue
 
     string messageType = fields.front();
@@ -193,7 +197,8 @@ void Nmea0183::onNmeaMessageReceive() {
     }
 }
 
-void Nmea0183::onGGAReceive(std::vector<std::string> dataFields) {
+void Nmea0183::onGGAReceive(std::vector<std::string> dataFields)
+{
     Logger::info("onGGAReceive");
     string msg = "Fields: ";
     for(vector<string>::iterator it = dataFields.begin(); it != dataFields.end(); it++) {
@@ -204,7 +209,8 @@ void Nmea0183::onGGAReceive(std::vector<std::string> dataFields) {
 
 }
 
-void Nmea0183::onVTGReceive(std::vector<std::string> dataFields) {
+void Nmea0183::onVTGReceive(std::vector<std::string> dataFields)
+{
     Logger::info("onVTGReceive");
     string msg = "Fields: ";
     for(vector<string>::iterator it = dataFields.begin(); it != dataFields.end(); it++) {
@@ -215,7 +221,8 @@ void Nmea0183::onVTGReceive(std::vector<std::string> dataFields) {
 
 }
 
-void Nmea0183::onRMCReceive(std::vector<std::string> dataFields) {
+void Nmea0183::onRMCReceive(std::vector<std::string> dataFields)
+{
     Logger::info("onRMCReceive");
     string msg = "Fields: ";
     for(vector<string>::iterator it = dataFields.begin(); it != dataFields.end(); it++) {
@@ -226,7 +233,8 @@ void Nmea0183::onRMCReceive(std::vector<std::string> dataFields) {
 
 }
 
-void Nmea0183::onGSVReceive(std::vector<std::string> dataFields) {
+void Nmea0183::onGSVReceive(std::vector<std::string> dataFields)
+{
     Logger::info("onGSVReceive");
     string msg = "Fields: ";
     for(vector<string>::iterator it = dataFields.begin(); it != dataFields.end(); it++) {
@@ -237,52 +245,64 @@ void Nmea0183::onGSVReceive(std::vector<std::string> dataFields) {
 
 }
 
-void Nmea0183::onGLLReceive(std::vector<std::string> dataFields) {
+void Nmea0183::onGLLReceive(std::vector<std::string> dataFields)
+{
     Logger::info("onGLLReceive");
 }
 
-void Nmea0183::onGSAReceive(std::vector<std::string> dataFields)  {
+void Nmea0183::onGSAReceive(std::vector<std::string> dataFields)
+{
     Logger::info("onGSAReceive");
 }
 
-void Nmea0183::onMSSReceive(std::vector<std::string> dataFields) {
+void Nmea0183::onMSSReceive(std::vector<std::string> dataFields)
+{
     Logger::info("onMSSReceive");
 }
 
-void Nmea0183::onZDAReceive(std::vector<std::string> dataFields) {
+void Nmea0183::onZDAReceive(std::vector<std::string> dataFields)
+{
     Logger::info("onZDAReceive");
 }
 
-void Nmea0183::onPSRF140Receive(std::vector<std::string> dataFields) {
+void Nmea0183::onPSRF140Receive(std::vector<std::string> dataFields)
+{
     Logger::info("onPSRF140Receive");
 }
 
-void Nmea0183::onPSRF150Receive(std::vector<std::string> dataFields) {
+void Nmea0183::onPSRF150Receive(std::vector<std::string> dataFields)
+{
     Logger::info("onPSRF150Receive");
 }
 
-void Nmea0183::onPSRF151Receive(std::vector<std::string> dataFields) {
+void Nmea0183::onPSRF151Receive(std::vector<std::string> dataFields)
+{
     Logger::info("onPSRF151Receive");
 }
 
-void Nmea0183::onPSRF152Receive(std::vector<std::string> dataFields) {
+void Nmea0183::onPSRF152Receive(std::vector<std::string> dataFields)
+{
     Logger::info("onPSRF152Receive");
 }
 
-void Nmea0183::onPSRF154Receive(std::vector<std::string> dataFields) {
+void Nmea0183::onPSRF154Receive(std::vector<std::string> dataFields)
+{
     Logger::info("onPSRF154Receive");
 }
 
-void Nmea0183::onPSRF155Receive(std::vector<std::string> dataFields) {
+void Nmea0183::onPSRF155Receive(std::vector<std::string> dataFields)
+{
     Logger::info("onPSRF155Receive");
 }
 
-bool Nmea0183::validateCRC() {
+bool Nmea0183::validateCRC()
+{
     //TODO write code!!
     return true;
 }
 
-vector<string> Nmea0183::parseFields(string fields) {
+vector<string> Nmea0183::parseFields(string fields)
+{
     vector<string> fieldsVector;
     stringstream fieldsStringStream(fields);
 

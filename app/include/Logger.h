@@ -20,7 +20,8 @@
 #include <iostream>
 #include <fstream>
 
-class Logger {
+class Logger
+{
     public:
         enum LogLevel {
             LEVEL_DEBUG = 0,
