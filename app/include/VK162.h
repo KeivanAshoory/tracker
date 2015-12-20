@@ -16,6 +16,9 @@
  * =============================================================================
  */
 
+#ifndef VK162_H
+#define VK162_H
+
 #include <termios.h>
 #include <Nmea0183.h>
 
@@ -51,3 +54,5 @@ class VK162 : Nmea0183
         static bool sIsDataAvailable;   //TODO sig_atomic_t ??
         static void signalHandler(int status);
 };
+
+#endif

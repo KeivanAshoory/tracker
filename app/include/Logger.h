@@ -16,6 +16,9 @@
  * =============================================================================
  */
 
+#ifndef LOGGER_H
+#define LOGGER_H
+
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -97,3 +100,5 @@ class Logger
         LogLevel mMinimumLogLevel;
         LogLevel mMinimumConsoleLevel;
 };
+
+#endif

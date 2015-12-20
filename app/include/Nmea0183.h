@@ -16,6 +16,9 @@
  * =============================================================================
  */
 
+#ifndef NMEA0183_H
+#define NMEA0183_H
+
 #include <vector>
 
 class Nmea0183
@@ -67,3 +70,5 @@ class Nmea0183
         bool validateCRC();
         static std::vector<std::string> parseFields(std::string fields);
 };
+
+#endif
