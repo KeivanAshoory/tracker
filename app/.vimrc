@@ -11,3 +11,6 @@ set formatoptions-=cro
 
 " Set makeprg to '[[ -f Makefile ]] && make || make -C ..'
 set makeprg=[[\ -f\ Makefile\ ]]\ &&\ make\ \\\|\\\|\ make\ -C\ ..
+
+" Ignore some files
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o
