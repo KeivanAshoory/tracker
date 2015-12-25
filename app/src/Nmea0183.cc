@@ -19,8 +19,8 @@
 #include <iostream>
 #include <vector>
 #include <sstream>
-#include <Logger.h>
-#include <Nmea0183.h>
+#include "Logger.h"
+#include "Nmea0183.h"
 
 using namespace std;
 

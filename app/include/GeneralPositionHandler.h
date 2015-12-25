@@ -20,13 +20,14 @@
 #define GENERAL_POSITION_HANDLER_H 
 
 #include <list>
+#include <string>
 #include "PositionNotifier.h"
 #include "PositionListener.h"
 
 class GeneralPositionHandler : public PositionNotifier
 {
     public:
-        GeneralPositionHandler();
+        GeneralPositionHandler(const std::string& config);
         ~GeneralPositionHandler();
 
         void registerPositionListener(const PositionListener* listener);

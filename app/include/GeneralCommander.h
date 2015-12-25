@@ -16,25 +16,32 @@
  * =============================================================================
  */
 
+#ifndef GENERAL_COMMANDER_H
+#define GENERAL_COMMANDER_H
+
 #include <list>
+#include <string>
 #include "CommandNotifier.h"
 #include "CommandRequestListener.h"
 
 class GeneralCommander : public CommandNotifier, public CommandRequestListener
 {
     public:
-        GeneralCommander();
+        GeneralCommander(const std::string& config);
         ~GeneralCommander();
 
+        // Impelement CommandNotifier
         void registerCommandListener(const CommandListener* listener);
         void unregisterCommandListener(const CommandListener* listener);
-        void notifyCommand(int commandId) const;
 
+        // Impelement CommandRequestListener
         void onNotifyCommandRequest(int commandId) const;
-
-    protected:
 
     private:
         std::list<const CommandListener*> mListeners;
 
+        // Impelement CommandNotifier
+        void notifyCommand(int commandId) const;
 };
+
+#endif

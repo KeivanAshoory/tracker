@@ -16,7 +16,8 @@
  * =============================================================================
  */
 
-#include <Client.h>
+#include "Logger.h"
+#include "Client.h"
 
 Client::Client()
 {
@@ -31,6 +32,7 @@ Client::~Client()
 void Client::onNotifyMonitorEvent(int eventId) const
 {
     //This is the default implementation for clients that does not suport this
+    Logger::info("Client::onNotifyMonitorEvent: " + eventId);
 }
 
 void Client::onNotifyPositionEvent(int position) const

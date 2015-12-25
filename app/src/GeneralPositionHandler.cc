@@ -18,7 +18,9 @@
 
 #include "GeneralPositionHandler.h"
 
-GeneralPositionHandler::GeneralPositionHandler()
+using namespace std;
+
+GeneralPositionHandler::GeneralPositionHandler(const string& config)
 {
 
 }

@@ -17,23 +17,70 @@
  */
 
 #include "ClientManager.h"
+#include "ClientFactory.h"
 
-ClientManager::ClientManager()
+using namespace std;
+
+ClientManager::ClientManager(const string& config):
+    mpGeneralCommander(NULL), mpGeneralMonitor(NULL),
+    mpGeneralPositionHandler(NULL)
 {
 
 }
 
 ClientManager::~ClientManager()
 {
-
+    // TODO Check the logic: all of them are valid to delete?!
+    for(std::list<Client*>::const_iterator
+            it = mClients.begin(); it != mClients.end(); ++it) {
+        delete (*it);
+    }
 }
 
-void ClientManager::createClients(std::string clientsSpec)
+void ClientManager::createClients(const string& clientsSpec)
 {
+    Client* client;
 
+    client = createClient("Console");
+    if(client == NULL) {
+        //TODO
+    }
+    mClients.push_back(client);
+    client->registerCommandRequestListener(mpGeneralCommander);
+    mpGeneralMonitor->registerStatusListener(client);
+    mpGeneralPositionHandler->registerPositionListener(client);
+
+    client = createClient("PushButton");
+    if(client == NULL) {
+        //TODO
+    }
+    mClients.push_back(client);
+    client->registerCommandRequestListener(mpGeneralCommander);
 }
 
-void ClientManager::createClient(std::string clientSpec)
+Client* ClientManager::createClient(const string& clientSpec)
 {
+    if(clientSpec == "Console") {
+        Client* pClient = ClientFactory::create(ClientFactory::CONSOLE_CLIENT);
+        return pClient;
 
+    } else if(clientSpec == "PushButton") {
+        Client* pClient = ClientFactory::create(ClientFactory::PUSH_BUTTON_CLIENT);
+        return pClient;
+    }
+}
+
+void ClientManager::setGeneralCommander(GeneralCommander* pGeneral)
+{
+    mpGeneralCommander = pGeneral;
+}
+
+void ClientManager::setGeneralMonitor(GeneralMonitor* pGeneral)
+{
+    mpGeneralMonitor = pGeneral;
+}
+
+void ClientManager::setGeneralPositionHandler(GeneralPositionHandler* pGeneral)
+{
+    mpGeneralPositionHandler = pGeneral;
 }

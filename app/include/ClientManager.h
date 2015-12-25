@@ -20,18 +20,31 @@
 #define CLIENT_MANAGER_H
 
 #include <string>
+#include "Client.h"
+#include "GeneralCommander.h"
+#include "GeneralMonitor.h"
+#include "GeneralPositionHandler.h"
 
 class ClientManager
 {
-    //TODO I think it must be a singletone
     public:
-        ClientManager();
+        ClientManager(const std::string& config);
         ~ClientManager();
 
-        void createClients(std::string clientsSpec);
+        void setGeneralCommander(GeneralCommander* pGeneral);
+        void setGeneralMonitor(GeneralMonitor* pGeneral);
+        void setGeneralPositionHandler(GeneralPositionHandler* pGeneral);
 
-    protected:
-        void createClient(std::string clientSpec);
+        void createClients(const std::string& clientsSpec);
+
+    private:
+        GeneralCommander* mpGeneralCommander;
+        GeneralMonitor* mpGeneralMonitor;
+        GeneralPositionHandler* mpGeneralPositionHandler;
+
+        std::list<Client*> mClients;
+
+        static Client* createClient(const std::string& clientSpec);
 };
 
 #endif

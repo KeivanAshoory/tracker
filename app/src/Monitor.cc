@@ -16,6 +16,7 @@
  * =============================================================================
  */
 
+#include "Logger.h"
 #include "Monitor.h"
 
 Monitor::Monitor()
@@ -30,6 +31,8 @@ Monitor::~Monitor()
 
 void Monitor::onNotifyStatus(int statusId) const
 {
+    Logger::info("Monitor::onNotifyStatus: " + statusId);
+
     //Do some extra work maybe
     onNotifyMonitorEvent(statusId);
 }

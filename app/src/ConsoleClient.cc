@@ -16,7 +16,8 @@
  * =============================================================================
  */
 
-#include <ConsoleClient.h>
+#include "Logger.h"
+#include "ConsoleClient.h"
 
 ConsoleClient::ConsoleClient()
 {
@@ -28,3 +29,18 @@ ConsoleClient::~ConsoleClient()
 
 }
 
+void ConsoleClient::onNotifyMonitorEvent(int eventId) const
+{
+    Logger::info("ConsoleClient::onNotifyMonitorEvent: " + eventId);
+
+    static int counter = 0;
+    counter++;
+    if(counter >= 5) {
+        notifyCommandRequest(55);
+    }
+}
+
+void ConsoleClient::onNotifyPositionEvent(int position) const
+{
+    Logger::info("ConsoleClient::onNotifyPositionEvent: " + position);
+}

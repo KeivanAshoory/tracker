@@ -16,9 +16,12 @@
  * =============================================================================
  */
 
+#include "Logger.h"
 #include "GeneralCommander.h"
 
-GeneralCommander::GeneralCommander()
+using namespace std;
+
+GeneralCommander::GeneralCommander(const string& config)
 {
 
 }
@@ -28,7 +31,7 @@ GeneralCommander::~GeneralCommander()
 
 }
 
-void GeneralCommander::registerCommandListener (const CommandListener* listener)
+void GeneralCommander::registerCommandListener(const CommandListener* listener)
 {
     mListeners.push_back(listener);
 }
@@ -48,5 +51,7 @@ void GeneralCommander::notifyCommand(int commandId) const
 
 void GeneralCommander::onNotifyCommandRequest(int commandId) const
 {
+    Logger::info("GeneralCommander::onNotifyCommandRequest: " + commandId);
 
+    notifyCommand(commandId);
 }

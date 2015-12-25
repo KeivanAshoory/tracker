@@ -16,9 +16,12 @@
  * =============================================================================
  */
 
+#include "Logger.h"
 #include "GeneralMonitor.h"
 
-GeneralMonitor::GeneralMonitor()
+using namespace std;
+
+GeneralMonitor::GeneralMonitor(const string& config)
 {
 
 }
@@ -40,6 +43,8 @@ void GeneralMonitor::unregisterStatusListener(const StatusListener* listener)
 
 void GeneralMonitor::notifyStatus(int statusId) const
 {
+    Logger::info("GeneralMonitor::notifyStatus: notify status " + statusId);
+
     for(std::list<const StatusListener*>::const_iterator
             it = mListeners.begin(); it != mListeners.end(); ++it) {
         (*it)->onNotifyStatus(statusId);

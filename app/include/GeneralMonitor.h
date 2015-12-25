@@ -16,20 +16,29 @@
  * =============================================================================
  */
 
+#ifndef GENERAL_MONITOR_H
+#define GENERAL_MONITOR_H
+
 #include <list>
+#include <string>
 #include "StatusNotifier.h"
 #include "StatusListener.h"
 
 class GeneralMonitor : public StatusNotifier
 {
     public:
-        GeneralMonitor();
+        GeneralMonitor(const std::string& config);
         ~GeneralMonitor();
 
+        // Impelement StatusNotifier
         void registerStatusListener(const StatusListener* listener);
         void unregisterStatusListener(const StatusListener* listener);
-        void notifyStatus(int StatusId) const;
 
     private:
         std::list<const StatusListener*> mListeners;
+
+        // Impelement StatusNotifier
+        void notifyStatus(int StatusId) const;
 };
+
+#endif

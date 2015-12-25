@@ -26,6 +26,10 @@ class ConsoleClient : public Client
     public:
         ConsoleClient();
         ~ConsoleClient();
+
+    private:
+        void onNotifyMonitorEvent(int eventId) const;
+        void onNotifyPositionEvent(int position) const;
 };
 
 #endif
