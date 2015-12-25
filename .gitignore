@@ -3,3 +3,8 @@ app/bin/*
 app/tags
 *.swp
 *~
+app/doxygen/*.db
+app/doxygen/html/*
+app/doxygen/latex/*
+app/doxygen/work/*
+
