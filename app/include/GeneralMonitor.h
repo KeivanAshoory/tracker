@@ -23,8 +23,9 @@
 #include <string>
 #include "StatusNotifier.h"
 #include "StatusListener.h"
+#include "StatusReportListener.h"
 
-class GeneralMonitor : public StatusNotifier
+class GeneralMonitor : public StatusNotifier, public StatusReportListener
 {
     public:
         GeneralMonitor(const std::string& config);
@@ -34,11 +35,15 @@ class GeneralMonitor : public StatusNotifier
         void registerStatusListener(const StatusListener* listener);
         void unregisterStatusListener(const StatusListener* listener);
 
-    private:
-        std::list<const StatusListener*> mListeners;
+        // Impelement StatusReportListener
+        void onNotifyStatusReport(int statusId) const;
 
+    protected:
         // Impelement StatusNotifier
         void notifyStatus(int StatusId) const;
+
+    private:
+        std::list<const StatusListener*> mListeners;
 };
 
 #endif

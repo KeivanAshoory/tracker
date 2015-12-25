@@ -16,6 +16,7 @@
  * =============================================================================
  */
 
+#include "Logger.h"
 #include "GeneralPositionHandler.h"
 
 using namespace std;
@@ -48,3 +49,9 @@ void GeneralPositionHandler::notifyPosition(int position) const
     }
 }
 
+void GeneralPositionHandler::onNotifyPositionReport(int position) const
+{
+    Logger::info("GeneralPositionHandler::onNotifyPositionReport: " + position);
+
+    notifyPosition(position);
+}

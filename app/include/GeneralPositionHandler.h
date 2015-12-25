@@ -23,15 +23,24 @@
 #include <string>
 #include "PositionNotifier.h"
 #include "PositionListener.h"
+#include "PositionReportListener.h"
 
-class GeneralPositionHandler : public PositionNotifier
+class GeneralPositionHandler : public PositionNotifier,
+    public PositionReportListener
 {
     public:
         GeneralPositionHandler(const std::string& config);
         ~GeneralPositionHandler();
 
+        // Implement PositionNotifier
         void registerPositionListener(const PositionListener* listener);
         void unregisterPositionListener(const PositionListener* listener);
+
+        // Impelement PositionReportListener
+        void onNotifyPositionReport(int position) const;
+
+    protected:
+        // Implement PositionNotifier
         void notifyPosition(int position) const;
 
     private:

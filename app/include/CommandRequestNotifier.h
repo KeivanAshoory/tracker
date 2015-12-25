@@ -31,6 +31,8 @@ class CommandRequestNotifier
         virtual void unregisterCommandRequestListener(
                 const CommandRequestListener* listener
                 ) = 0;
+
+    protected:
         virtual void notifyCommandRequest(int commandId) const = 0;
 };
 

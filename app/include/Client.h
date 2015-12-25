@@ -29,11 +29,15 @@ class Client : public ClientControl,
 {
     public:
         virtual ~Client() = 0;
-        virtual void onNotifyMonitorEvent(int eventId) const;
-        virtual void onNotifyPositionEvent(int position) const;
 
     protected:
         Client();
+
+        // Implement Monitor
+        virtual void onNotifyMonitorEvent(int eventId) const;
+
+        // Implement PositionHandler
+        virtual void onNotifyPositionEvent(int position) const;
 };
 
 #endif

@@ -25,12 +25,14 @@ class PositionHandler : public PositionListener
 {
     public:
         virtual ~PositionHandler() = 0;
-        //Override observer method
+
+        // Implement PositionListener
         void onNotifyPosition(int position) const;
-        virtual void onNotifyPositionEvent(int position) const = 0;
 
     protected:
         PositionHandler();
+
+        virtual void onNotifyPositionEvent(int position) const = 0;
 };
 
 #endif

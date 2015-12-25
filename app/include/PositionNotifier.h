@@ -31,6 +31,8 @@ class PositionNotifier
         virtual void unregisterPositionListener(
                 const PositionListener* listener
                 ) = 0;
+
+    protected:
         virtual void notifyPosition(int Position) const = 0;
 };
 

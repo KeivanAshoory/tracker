@@ -51,3 +51,9 @@ void GeneralMonitor::notifyStatus(int statusId) const
     }
 }
 
+void GeneralMonitor::onNotifyStatusReport(int statusId) const
+{
+    Logger::info("GeneralMonitor::onNotifyStatusReport: " + statusId);
+
+    notifyStatus(statusId);
+}

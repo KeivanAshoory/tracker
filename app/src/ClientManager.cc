@@ -32,7 +32,7 @@ ClientManager::~ClientManager()
 {
     // TODO Check the logic: all of them are valid to delete?!
     for(std::list<Client*>::const_iterator
-            it = mClients.begin(); it != mClients.end(); ++it) {
+            it = mpClients.begin(); it != mpClients.end(); ++it) {
         delete (*it);
     }
 }
@@ -45,7 +45,7 @@ void ClientManager::createClients(const string& clientsSpec)
     if(client == NULL) {
         //TODO
     }
-    mClients.push_back(client);
+    mpClients.push_back(client);
     client->registerCommandRequestListener(mpGeneralCommander);
     mpGeneralMonitor->registerStatusListener(client);
     mpGeneralPositionHandler->registerPositionListener(client);
@@ -54,7 +54,7 @@ void ClientManager::createClients(const string& clientsSpec)
     if(client == NULL) {
         //TODO
     }
-    mClients.push_back(client);
+    mpClients.push_back(client);
     client->registerCommandRequestListener(mpGeneralCommander);
 }
 

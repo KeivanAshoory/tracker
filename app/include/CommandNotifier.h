@@ -31,6 +31,8 @@ class CommandNotifier
         virtual void unregisterCommandListener(
                 const CommandListener* listener
                 ) = 0;
+
+    protected:
         virtual void notifyCommand(int commandId) const = 0;
 };
 

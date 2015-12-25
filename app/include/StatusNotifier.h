@@ -25,12 +25,15 @@ class StatusNotifier
 {
     public:
         virtual ~StatusNotifier() {};
+
         virtual void registerStatusListener(
                 const StatusListener* listener
                 ) = 0;
         virtual void unregisterStatusListener(
                 const StatusListener* listener
                 ) = 0;
+
+    protected:
         virtual void notifyStatus(int StatusId) const = 0;
 };
 

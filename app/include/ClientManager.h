@@ -42,7 +42,7 @@ class ClientManager
         GeneralMonitor* mpGeneralMonitor;
         GeneralPositionHandler* mpGeneralPositionHandler;
 
-        std::list<Client*> mClients;
+        std::list<Client*> mpClients;
 
         static Client* createClient(const std::string& clientSpec);
 };

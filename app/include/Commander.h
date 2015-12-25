@@ -27,16 +27,19 @@ class Commander : public CommandRequestNotifier
     public:
         virtual ~Commander() = 0;
 
+        //Implement CommandRequestNotifier
         virtual void registerCommandRequestListener(
                 const CommandRequestListener* listener
                 );
         virtual void unregisterCommandRequestListener(
                 const CommandRequestListener* listener
                 );
-        virtual void notifyCommandRequest(int commandId) const;
 
     protected:
         Commander();
+
+        //Implement CommandRequestNotifier
+        virtual void notifyCommandRequest(int commandId) const;
 
     private:
         std::list<const CommandRequestListener*> mListeners;

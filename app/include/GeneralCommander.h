@@ -22,6 +22,7 @@
 #include <list>
 #include <string>
 #include "CommandNotifier.h"
+#include "CommandListener.h"
 #include "CommandRequestListener.h"
 
 class GeneralCommander : public CommandNotifier, public CommandRequestListener
@@ -37,11 +38,12 @@ class GeneralCommander : public CommandNotifier, public CommandRequestListener
         // Impelement CommandRequestListener
         void onNotifyCommandRequest(int commandId) const;
 
-    private:
-        std::list<const CommandListener*> mListeners;
-
+    protected:
         // Impelement CommandNotifier
         void notifyCommand(int commandId) const;
+
+    private:
+        std::list<const CommandListener*> mListeners;
 };
 
 #endif

@@ -27,7 +27,8 @@ class ConsoleClient : public Client
         ConsoleClient();
         ~ConsoleClient();
 
-    private:
+    protected:
+        // Override Client
         void onNotifyMonitorEvent(int eventId) const;
         void onNotifyPositionEvent(int position) const;
 };

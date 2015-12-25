@@ -25,12 +25,14 @@ class Monitor : public StatusListener
 {
     public:
         virtual ~Monitor() = 0;
-        //Override observer method
+
+        // Implement StatusListener
         void onNotifyStatus(int StatusId) const;
-        virtual void onNotifyMonitorEvent(int eventId) const = 0;
 
     protected:
         Monitor();
+
+        virtual void onNotifyMonitorEvent(int eventId) const = 0;
 };
 
 #endif
