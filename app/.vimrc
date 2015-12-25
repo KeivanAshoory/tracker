@@ -13,7 +13,7 @@ set formatoptions-=cro
 set makeprg=[[\ -f\ Makefile\ ]]\ &&\ make\ \\\|\\\|\ make\ -C\ ..
 
 " Ignore some files
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*/doxygen/*
 
 " Add to path
 set path+=$PWD/include,$PWD/src
