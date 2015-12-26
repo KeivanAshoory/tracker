@@ -23,11 +23,13 @@ using namespace std;
 
 GeneralPositionHandler::GeneralPositionHandler(const string& config)
 {
+    Logger::info("GeneralPositionHandler::ctor");
 
 }
 
 GeneralPositionHandler::~GeneralPositionHandler()
 {
+    Logger::info("GeneralPositionHandler::dtor");
 
 }
 

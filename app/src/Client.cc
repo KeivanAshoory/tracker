@@ -32,7 +32,7 @@ Client::~Client()
 void Client::onNotifyMonitorEvent(int eventId) const
 {
     //This is the default implementation for clients that does not suport this
-    Logger::info("Client::onNotifyMonitorEvent: " + eventId);
+    Logger::info("Client::onNotifyMonitorEvent: ");
 }
 
 void Client::onNotifyPositionEvent(int position) const

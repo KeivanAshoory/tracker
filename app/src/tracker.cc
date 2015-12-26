@@ -21,6 +21,7 @@
 #include <unistd.h>
 #include "Logger.h"
 #include "VK162.h"
+#include "Application.h"
 
 using namespace std;
 
@@ -55,15 +56,20 @@ int main()
 
     Logger::info("Serial port opened successfully.");
 
+    Application* pApp = Application::getInstance();
+    pApp->onStart();
+
     while(isQuitRequested != SIGINT) {
         usleep(100000);
         if(gps.isDataAvailable()) {
             if(gps.readSerial()) {
             }
+
         }
     }
 
     Logger::info("tracker stopped.");
 
+    delete pApp;    //TODO Is that okay?! should we delete it in this way?
     return 0;
 }

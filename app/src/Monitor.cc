@@ -31,7 +31,7 @@ Monitor::~Monitor()
 
 void Monitor::onNotifyStatus(int statusId) const
 {
-    Logger::info("Monitor::onNotifyStatus: " + statusId);
+    Logger::info("Monitor::onNotifyStatus: " );
 
     //Do some extra work maybe
     onNotifyMonitorEvent(statusId);

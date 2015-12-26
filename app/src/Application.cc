@@ -28,11 +28,12 @@ Application::Application() :
     mpGeneralPositionHandler(NULL), mpClientManager(NULL),
     mIsStarted(false)
 {
-
+    Logger::info("Application::ctor");
 }
 
 Application::~Application()
 {
+    Logger::info("Application::dtor");
     onTerminate();
 }
 
@@ -51,6 +52,7 @@ bool Application::isStarted(void)
 
 void Application::onStart(void)
 {
+    Logger::info("Application::onStart");
     assert(!mIsStarted); // Only once!
 
     // 1) Read configuration
@@ -89,11 +91,12 @@ void Application::onStart(void)
 
 void Application::onTerminate(void)
 {
+    Logger::info("Application::onTerminate");
     // Warning: Do not check mIsStarted before deleting allocated objects
     delete mpGeneralCommander;
     delete mpGeneralMonitor;
     delete mpGeneralPositionHandler;
-    delete mpGeneralMonitor;
+    delete mpClientManager;
 
     //TODO: Do more work here!
     mIsStarted = false;

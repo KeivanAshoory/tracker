@@ -17,6 +17,7 @@
  */
 
 #include "ConsoleClient.h"
+#include "PushButtonClient.h"
 #include "ClientFactory.h"
 
 using namespace std;
@@ -27,7 +28,7 @@ Client* ClientFactory::create(ClientType clientId)
         case CONSOLE_CLIENT:
             return new ConsoleClient;
         case PUSH_BUTTON_CLIENT:
-            return new ConsoleClient;
+            return new PushButtonClient;
             break;
         default:
             return NULL;

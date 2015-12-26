@@ -16,6 +16,7 @@
  * =============================================================================
  */
 
+#include "Logger.h"
 #include "ClientManager.h"
 #include "ClientFactory.h"
 
@@ -25,11 +26,13 @@ ClientManager::ClientManager(const string& config):
     mpGeneralCommander(NULL), mpGeneralMonitor(NULL),
     mpGeneralPositionHandler(NULL)
 {
+    Logger::info("ClientManager::ctor");
 
 }
 
 ClientManager::~ClientManager()
 {
+    Logger::info("ClientManager::dtor");
     // TODO Check the logic: all of them are valid to delete?!
     for(std::list<Client*>::const_iterator
             it = mpClients.begin(); it != mpClients.end(); ++it) {

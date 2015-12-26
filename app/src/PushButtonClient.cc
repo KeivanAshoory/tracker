@@ -16,15 +16,18 @@
  * =============================================================================
  */
 
+#include "Logger.h"
 #include "PushButtonClient.h"
 
 PushButtonClient::PushButtonClient()
 {
+    Logger::info("PushButtonClient::ctor");
 
 }
 
 PushButtonClient::~PushButtonClient()
 {
+    Logger::info("PushButtonClient::dtor");
 
 }
 

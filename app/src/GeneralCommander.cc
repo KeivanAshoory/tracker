@@ -23,11 +23,13 @@ using namespace std;
 
 GeneralCommander::GeneralCommander(const string& config)
 {
+    Logger::info("GeneralCommander::ctor");
 
 }
 
 GeneralCommander::~GeneralCommander()
 {
+    Logger::info("GeneralCommander::dtor");
 
 }
 
@@ -51,7 +53,7 @@ void GeneralCommander::notifyCommand(int commandId) const
 
 void GeneralCommander::onNotifyCommandRequest(int commandId) const
 {
-    Logger::info("GeneralCommander::onNotifyCommandRequest: " + commandId);
+    Logger::info("GeneralCommander::onNotifyCommandRequest: ");
 
     notifyCommand(commandId);
 }

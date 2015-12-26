@@ -21,17 +21,19 @@
 
 ConsoleClient::ConsoleClient()
 {
+    Logger::info("ConsoleClient::ctor");
 
 }
 
 ConsoleClient::~ConsoleClient()
 {
+    Logger::info("ConsoleClient::dtor");
 
 }
 
 void ConsoleClient::onNotifyMonitorEvent(int eventId) const
 {
-    Logger::info("ConsoleClient::onNotifyMonitorEvent: " + eventId);
+    Logger::info("ConsoleClient::onNotifyMonitorEvent: ");
 
     static int counter = 0;
     counter++;
@@ -42,5 +44,5 @@ void ConsoleClient::onNotifyMonitorEvent(int eventId) const
 
 void ConsoleClient::onNotifyPositionEvent(int position) const
 {
-    Logger::info("ConsoleClient::onNotifyPositionEvent: " + position);
+    Logger::info("ConsoleClient::onNotifyPositionEvent: ");
 }

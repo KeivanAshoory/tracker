@@ -23,11 +23,13 @@ using namespace std;
 
 GeneralMonitor::GeneralMonitor(const string& config)
 {
+    Logger::info("GeneralMonitor::ctor");
 
 }
 
 GeneralMonitor::~GeneralMonitor()
 {
+    Logger::info("GeneralMonitor::dtor");
 
 }
 
@@ -43,7 +45,7 @@ void GeneralMonitor::unregisterStatusListener(const StatusListener* listener)
 
 void GeneralMonitor::notifyStatus(int statusId) const
 {
-    Logger::info("GeneralMonitor::notifyStatus: notify status " + statusId);
+    Logger::info("GeneralMonitor::notifyStatus: notify status " );
 
     for(std::list<const StatusListener*>::const_iterator
             it = mListeners.begin(); it != mListeners.end(); ++it) {
@@ -53,7 +55,7 @@ void GeneralMonitor::notifyStatus(int statusId) const
 
 void GeneralMonitor::onNotifyStatusReport(int statusId) const
 {
-    Logger::info("GeneralMonitor::onNotifyStatusReport: " + statusId);
+    Logger::info("GeneralMonitor::onNotifyStatusReport: " );
 
     notifyStatus(statusId);
 }
