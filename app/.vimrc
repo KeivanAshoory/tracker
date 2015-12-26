@@ -7,7 +7,7 @@ set foldmethod=syntax
 set nofoldenable
 
 " Disable auto comment
-set formatoptions-=cro
+set formatoptions-=ro
 
 " Set makeprg to '[[ -f Makefile ]] && make || make -C ..'
 set makeprg=[[\ -f\ Makefile\ ]]\ &&\ make\ \\\|\\\|\ make\ -C\ ..
