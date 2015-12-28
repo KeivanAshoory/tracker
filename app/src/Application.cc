@@ -19,6 +19,9 @@
 #include <cassert>
 #include <new>
 #include "Logger.h"
+#include "ConfigLoaderFactory.h"
+#include "ConfigLoader.h"
+#include "ConfigNode.h"
 #include "Application.h"
 
 Application* Application::mInstance = 0;
@@ -62,6 +65,15 @@ void Application::onStart(void)
     // 5) Start data acquiring
 
     // 1) Read configuration
+    ConfigLoader* pConfigLoader = 
+        ConfigLoaderFactory::create(ConfigLoaderFactory::YAML_CONFIG_LOADER);
+    ConfigNode* pRootConfig = pConfigLoader->getConfig();
+
+    delete pConfigLoader;
+    delete pRootConfig;
+
+
+
 
     // 2) Create objects
     mpGeneralCommander = new GeneralCommander("c");
