@@ -4,16 +4,20 @@ CFLAGS = -g -Wall
 SRCDIR = src
 BUILDDIR = build
 ifndef CROSS
-	TARGET = bin/tracker
+	ROOT = /.
+	TARGET = ./bin/tracker
+	PREFIX = $(ROOT)/usr/local
 else
-	TARGET = /opt/FriendlyARM/mini2440/rootfs_qtopia_qt4/opt/share/tracker/bin/tracker
+	ROOT = /opt/FriendlyARM/mini2440/rootfs_qtopia_qt4
+	TARGET = $(ROOT)/opt/share/tracker/bin/tracker
+	PREFIX = $(ROOT)/usr
 endif
 
 SRCEXT = cc
 SOURCES = $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS = $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
-LIB = #-pthread -lmongoclient -L lib -lboost_thread-mt -lboost_filesystem-mt -lboost_system-mt
-INC = -I include
+LIB = -L $(PREFIX)/lib -lyaml-cpp
+INC = -I./include -I $(PREFIX)/include
 
 $(TARGET): $(OBJECTS)
 	@echo " Linking..."
