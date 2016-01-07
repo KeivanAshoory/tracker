@@ -16,11 +16,14 @@
  * =============================================================================
  */
 
+#include <stdlib.h>
+#include "Config.h"
 #include "RootConfig.h"
 
-RootConfig::RootConfig()
+RootConfig::RootConfig(ConfigNode* pConfigNode) :
+    ComponentConfig(pConfigNode)
 {
-
+    //TODO Is it necessary to validate ConfigNode?! e.g. whether it is map?
 }
 
 RootConfig::~RootConfig()
@@ -28,20 +31,20 @@ RootConfig::~RootConfig()
 
 }
 
-ClientManagerConfig RootConfig::getClientManagerConfig() const
+template <typename T>
+T RootConfig::getConfig()
 {
-    // in mapping find the node which is mapped to "ClientManager"
-    // 1) hasComponent("ClientManager")
-    // 2) isMap("ClientManager")
-    // 3) getMap/Component("ClientManager") as map
+    ConfigNode* pConfigElement =
+        mpConfigNode->getElement(Config::getElementTag<T>());
 
+    if(!pConfigElement) {
+        // Cannot load the configuration element!
+        // TODO Log something!
+        exit(-1);   //TODO do something based on guideline
+    }
+
+    return T(pConfigElement);
 }
 
-std::vector<ClientConfig> RootConfig::getClientsConfig() const
-{
-    // in mapping find the node which is mapped to "Clients"
-    // 1) hasComponent("Clients")
-    // 2) isSequence("Clients")
-    // 3) getSeq/Component("Clients") as seq
+template ClientManagerConfig RootConfig::getConfig();
 
-}

@@ -31,6 +31,11 @@ class ConfigLoaderFactory
         };
 
         static ConfigLoader* create(ConfigLoderType loaderType);
+        // We can define different factory methods like:
+        // createYamlByFile
+        // createYamlByStream
+        // createYamlByLocalFile
+        // createYamlByRemoteFile
 };
 
 #endif /* end of include guard: CONFIGLOADERFACTORY_H */

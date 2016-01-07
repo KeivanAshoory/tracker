@@ -18,12 +18,22 @@
 
 #include "YamlConfigNode.h"
 
-YamlConfigNode::YamlConfigNode()
+YamlConfigNode::YamlConfigNode(YAML::Node yamlNode) : mYamlNode(yamlNode)
 {
-
+    assert(!yamlNode.IsNull());
 }
 
 YamlConfigNode::~YamlConfigNode()
 {
 
+}
+
+bool YamlConfigNode::hasElement(const std::string& elementTag) const
+{
+    return false;
+}
+
+ConfigNode* YamlConfigNode::getElement(const std::string& elementTag) const
+{
+    return NULL;
 }

@@ -20,13 +20,20 @@
 
 #define YAMLCONFIGNODE_H
 
+#include <yaml-cpp/yaml.h>
 #include "ConfigNode.h"
 
 class YamlConfigNode : public ConfigNode
 {
     public:
-        YamlConfigNode();
+        YamlConfigNode(YAML::Node yamlNode);
         ~YamlConfigNode();
+
+        bool hasElement(const std::string& elementTag) const;
+        ConfigNode* getElement(const std::string& elementTag) const;
+
+    private:
+        YAML::Node mYamlNode;
 
 };
 

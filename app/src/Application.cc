@@ -18,10 +18,12 @@
 
 #include <cassert>
 #include <new>
+#include <stdlib.h>
 #include "Logger.h"
 #include "ConfigLoaderFactory.h"
 #include "ConfigLoader.h"
 #include "ConfigNode.h"
+#include "RootConfig.h"
 #include "Application.h"
 
 Application* Application::mInstance = 0;
@@ -67,11 +69,20 @@ void Application::onStart(void)
     // 1) Read configuration
     ConfigLoader* pConfigLoader = 
         ConfigLoaderFactory::create(ConfigLoaderFactory::YAML_CONFIG_LOADER);
-    ConfigNode* pRootConfig = pConfigLoader->getConfig();
 
+    ConfigNode* pRootConfigNode = pConfigLoader->getConfig();
     delete pConfigLoader;
-    delete pRootConfig;
 
+    if(!pRootConfigNode) {
+        // Cannot load the configuration file!
+        // TODO Log something!
+        exit(-1);   //TODO do something based on guideline
+    }
+
+    RootConfig rootConfig(pRootConfigNode);
+
+    ClientManagerConfig clientManagerConfig =
+        rootConfig.getConfig<ClientManagerConfig>();
 
 
 

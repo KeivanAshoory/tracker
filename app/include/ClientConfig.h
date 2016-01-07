@@ -22,16 +22,17 @@
 
 #include <string>
 #include <vector>
+#include "ConfigNode.h"
+#include "ComponentConfig.h"
 
-class ClientConfig
+class ClientConfig : private ComponentConfig
 {
     public:
-        ClientConfig();
+        ClientConfig(ConfigNode* pConfigNode);
         ~ClientConfig();
 
         std::string getClientType() const;
         std::vector<std::string> getRoles() const;
 };
-
 
 #endif /* end of include guard: CLIENTCONFIG_H */

@@ -24,11 +24,13 @@
 
 #include <string>
 #include <vector>
+#include "ConfigNode.h"
+#include "ComponentConfig.h"
 
-class ClientManagerConfig
+class ClientManagerConfig : public ComponentConfig
 {
     public:
-        ClientManagerConfig();
+        ClientManagerConfig(ConfigNode* pConfigNode);
         ~ClientManagerConfig();
 
         std::string getXXX() const;

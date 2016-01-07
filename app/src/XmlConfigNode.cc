@@ -28,3 +28,13 @@ XmlConfigNode::~XmlConfigNode()
 {
 
 }
+
+bool XmlConfigNode::hasElement(const std::string& elementTag) const
+{
+    return false;
+}
+
+ConfigNode* XmlConfigNode::getElement(const std::string& elementTag) const
+{
+    return NULL;
+}

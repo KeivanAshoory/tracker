@@ -28,6 +28,8 @@ class XmlConfigNode : public ConfigNode
         XmlConfigNode();
         ~XmlConfigNode();
 
+        bool hasElement(const std::string& elementTag) const;
+        ConfigNode* getElement(const std::string& elementTag) const;
 };
 
 #endif /* end of include guard: XMLCONFIGNODE_H */

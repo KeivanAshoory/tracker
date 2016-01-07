@@ -1,12 +1,12 @@
 /*
  * =============================================================================
  *
- *       Filename:  ConfigNode.cc
+ *       Filename:  ComponentConfig.cc
  *
- *    Description:  
+ *    Description:  Component config base abstract class
  *
  *        Version:  1.0
- *        Created:  28/12/15 11:56:15
+ *        Created:  05/01/16 23:04:00
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -16,14 +16,16 @@
  * =============================================================================
  */
 
-#include "ConfigNode.h"
+#include "ComponentConfig.h"
 
-ConfigNode::ConfigNode()
+ComponentConfig::ComponentConfig(ConfigNode* pConfigNode) : 
+    mpConfigNode(pConfigNode)
 {
 
 }
 
-ConfigNode::~ConfigNode()
+ComponentConfig::~ComponentConfig()
 {
-
+    delete mpConfigNode;
 }
+

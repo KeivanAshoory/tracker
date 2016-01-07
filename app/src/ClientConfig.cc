@@ -18,8 +18,8 @@
 
 #include "ClientConfig.h"
 
-
-ClientConfig::ClientConfig()
+ClientConfig::ClientConfig(ConfigNode* pConfigNode) : 
+    ComponentConfig(pConfigNode)
 {
 
 }

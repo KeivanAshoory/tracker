@@ -17,6 +17,7 @@
  */
 
 #include <cassert>
+#include <yaml-cpp/yaml.h>
 #include "YamlConfigNode.h"
 #include "YamlConfigLoader.h"
 
@@ -32,7 +33,13 @@ YamlConfigLoader::~YamlConfigLoader()
 
 ConfigNode* YamlConfigLoader::loadConfig(void) const
 {
-    ConfigNode* pConfigNode = new YamlConfigNode();
-    assert(pConfigNode);
-    return pConfigNode;
+    //TODO remember to handle exception
+    YAML::Node rootYamlNode = YAML::LoadFile("config.yaml");
+
+    if(rootYamlNode.IsNull()) {
+        return NULL;
+    }
+    //TODO should be completed
+
+   return new YamlConfigNode(rootYamlNode);
 }

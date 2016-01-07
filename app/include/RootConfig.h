@@ -22,16 +22,20 @@
 
 #include <vector>
 #include "ClientConfig.h"
+#include "ConfigNode.h"
+#include "ComponentConfig.h"
 #include "ClientManagerConfig.h"
 
-class RootConfig
+class RootConfig : private ComponentConfig
 {
-    RootConfig();
-    ~RootConfig();
+    public:
+        RootConfig(ConfigNode* pConfigNode);
+        ~RootConfig();
 
-    ClientManagerConfig getClientManagerConfig() const;
-    std::vector<ClientConfig> getClientsConfig() const;
+
+        template <typename T> 
+            T getConfig();
+
 };
-
 
 #endif /* end of include guard: ROOTCONFIG_H */

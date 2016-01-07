@@ -18,8 +18,8 @@
 
 #include "ClientManagerConfig.h"
 
-
-ClientManagerConfig::ClientManagerConfig()
+ClientManagerConfig::ClientManagerConfig(ConfigNode* pConfigNode) : 
+    ComponentConfig(pConfigNode)
 {
 
 }
@@ -33,4 +33,3 @@ std::string ClientManagerConfig::getXXX() const
 {
     return "";
 }
-

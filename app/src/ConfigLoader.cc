@@ -37,8 +37,6 @@ ConfigNode* ConfigLoader::getConfig(void) const
     // ConfigNode.
 
     ConfigNode* pConfigNode = loadConfig();
-    //TODO Any check or soemthing here?! or we can leave it to the actual client
-    assert(pConfigNode);
     return pConfigNode;
 
 }
