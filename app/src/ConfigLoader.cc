@@ -29,14 +29,14 @@ ConfigLoader::~ConfigLoader()
 
 }
 
-ConfigNode* ConfigLoader::getConfig(void) const
+ConfigElement* ConfigLoader::getConfig(void) const
 {
     // The Factory Method design pattern is used here. This method uses the 
-    // pure vitual method LoadConfig to create an implementation of ConfigNode;
-    // e.g. YamlConfigNode. A subclass of ConfigLoader will create a subclass of
-    // ConfigNode.
+    // pure vitual method LoadConfig to create an implementation of ConfigElement;
+    // e.g. YamlConfigElement. A subclass of ConfigLoader will create a subclass of
+    // ConfigElement.
 
-    ConfigNode* pConfigNode = loadConfig();
-    return pConfigNode;
+    ConfigElement* pConfigElement = loadConfig();
+    return pConfigElement;
 
 }

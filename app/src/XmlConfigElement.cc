@@ -1,9 +1,9 @@
 /*
  * =============================================================================
  *
- *       Filename:  XmlConfigNode.cc
+ *       Filename:  XmlConfigElement.cc
  *
- *    Description:  Xml configuration node concrete class
+ *    Description:  Xml configuration element concrete class
  *
  *        Version:  1.0
  *        Created:  28/12/15 12:03:02
@@ -17,24 +17,24 @@
  */
 
 #include <cassert>
-#include "XmlConfigNode.h"
+#include "XmlConfigElement.h"
 
-XmlConfigNode::XmlConfigNode()
+XmlConfigElement::XmlConfigElement()
 {
     assert(0);  // Not Imlemented!
 }
 
-XmlConfigNode::~XmlConfigNode()
+XmlConfigElement::~XmlConfigElement()
 {
 
 }
 
-bool XmlConfigNode::hasElement(const std::string& elementTag) const
+bool XmlConfigElement::hasElement(const std::string& elementTag) const
 {
     return false;
 }
 
-ConfigNode* XmlConfigNode::getElement(const std::string& elementTag) const
+ConfigElement* XmlConfigElement::getElement(const std::string& elementTag) const
 {
     return NULL;
 }

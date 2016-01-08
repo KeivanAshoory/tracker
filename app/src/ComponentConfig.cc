@@ -18,14 +18,14 @@
 
 #include "ComponentConfig.h"
 
-ComponentConfig::ComponentConfig(ConfigNode* pConfigNode) : 
-    mpConfigNode(pConfigNode)
+ComponentConfig::ComponentConfig(ConfigElement* pConfigElement) : 
+    mpConfigElement(pConfigElement)
 {
 
 }
 
 ComponentConfig::~ComponentConfig()
 {
-    delete mpConfigNode;
+    delete mpConfigElement;
 }
 

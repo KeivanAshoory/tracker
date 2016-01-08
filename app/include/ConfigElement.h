@@ -1,9 +1,9 @@
 /*
  * =============================================================================
  *
- *       Filename:  ConfigNode.h
+ *       Filename:  ConfigElement.h
  *
- *    Description:  Configration node interface class
+ *    Description:  Configration element interface class
  *
  *        Version:  1.0
  *        Created:  28/12/15 11:59:12
@@ -16,19 +16,19 @@
  * =============================================================================
  */
 
-#ifndef CONFIGNODE_H
+#ifndef CONFIGELEMENT_H
 
-#define CONFIGNODE_H
+#define CONFIGELEMENT_H
 
 #include <string>
 
-class ConfigNode
+class ConfigElement
 {
     public:
-        virtual ~ConfigNode() {};
+        virtual ~ConfigElement() {};
 
         virtual bool hasElement(const std::string& elementTag) const = 0;
-        virtual ConfigNode* getElement(const std::string& elementTag) const = 0;
+        virtual ConfigElement* getElement(const std::string& elementTag) const = 0;
 };
 
-#endif /* end of include guard: CONFIGNODE_H */
+#endif /* end of include guard: CONFIGELEMENT_H */

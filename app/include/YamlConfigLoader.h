@@ -29,7 +29,7 @@ class YamlConfigLoader : public ConfigLoader
         ~YamlConfigLoader();
 
         // Implement ConfigLoader
-        ConfigNode* loadConfig(void) const;
+        ConfigElement* loadConfig(void) const;
 };
 
 #endif /* end of include guard: YAMLCONFIGLOADER_H */

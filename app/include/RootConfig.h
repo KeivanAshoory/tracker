@@ -22,14 +22,14 @@
 
 #include <vector>
 #include "ClientConfig.h"
-#include "ConfigNode.h"
+#include "ConfigElement.h"
 #include "ComponentConfig.h"
 #include "ClientManagerConfig.h"
 
 class RootConfig : private ComponentConfig
 {
     public:
-        RootConfig(ConfigNode* pConfigNode);
+        RootConfig(ConfigElement* pConfigElement);
         ~RootConfig();
 
 

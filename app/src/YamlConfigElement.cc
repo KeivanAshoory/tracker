@@ -1,9 +1,9 @@
 /*
  * =============================================================================
  *
- *       Filename:  YamlConfigNode.cc
+ *       Filename:  YamlConfigElement.cc
  *
- *    Description:  Yaml configuration node concrete class
+ *    Description:  Yaml configuration element concrete class
  *
  *        Version:  1.0
  *        Created:  28/12/15 11:57:25
@@ -16,24 +16,24 @@
  * =============================================================================
  */
 
-#include "YamlConfigNode.h"
+#include "YamlConfigElement.h"
 
-YamlConfigNode::YamlConfigNode(YAML::Node yamlNode) : mYamlNode(yamlNode)
+YamlConfigElement::YamlConfigElement(YAML::Node yamlNode) : mYamlNode(yamlNode)
 {
     assert(!yamlNode.IsNull());
 }
 
-YamlConfigNode::~YamlConfigNode()
+YamlConfigElement::~YamlConfigElement()
 {
 
 }
 
-bool YamlConfigNode::hasElement(const std::string& elementTag) const
+bool YamlConfigElement::hasElement(const std::string& elementTag) const
 {
     return false;
 }
 
-ConfigNode* YamlConfigNode::getElement(const std::string& elementTag) const
+ConfigElement* YamlConfigElement::getElement(const std::string& elementTag) const
 {
     return NULL;
 }

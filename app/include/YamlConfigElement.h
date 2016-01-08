@@ -1,9 +1,9 @@
 /*
  * =============================================================================
  *
- *       Filename:  YamlConfigNode.h
+ *       Filename:  YamlConfigElement.h
  *
- *    Description:  Yaml configuration node concrete class
+ *    Description:  Yaml configuration element concrete class
  *
  *        Version:  1.0
  *        Created:  28/12/15 12:00:57
@@ -16,25 +16,25 @@
  * =============================================================================
  */
 
-#ifndef YAMLCONFIGNODE_H
+#ifndef YAMLCONFIGELEMENT_H
 
-#define YAMLCONFIGNODE_H
+#define YAMLCONFIGELEMENT_H
 
 #include <yaml-cpp/yaml.h>
-#include "ConfigNode.h"
+#include "ConfigElement.h"
 
-class YamlConfigNode : public ConfigNode
+class YamlConfigElement : public ConfigElement
 {
     public:
-        YamlConfigNode(YAML::Node yamlNode);
-        ~YamlConfigNode();
+        YamlConfigElement(YAML::Node yamlNode);
+        ~YamlConfigElement();
 
         bool hasElement(const std::string& elementTag) const;
-        ConfigNode* getElement(const std::string& elementTag) const;
+        ConfigElement* getElement(const std::string& elementTag) const;
 
     private:
         YAML::Node mYamlNode;
 
 };
 
-#endif /* end of include guard: YAMLCONFIGNODE_H */
+#endif /* end of include guard: YAMLCONFIGELEMENT_H */

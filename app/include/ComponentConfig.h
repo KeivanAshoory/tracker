@@ -21,7 +21,7 @@
 #define COMPONENTCONFIG_H
 
 #include <string>
-#include "ConfigNode.h"
+#include "ConfigElement.h"
 
 class ComponentConfig
 {
@@ -30,9 +30,9 @@ class ComponentConfig
 
     protected:
         //TODO copy ctor is most likely needed!
-        ComponentConfig(ConfigNode* pConfigNode);
+        ComponentConfig(ConfigElement* pConfigElement);
 
-        ConfigNode* mpConfigNode;
+        ConfigElement* mpConfigElement;
 };
 
 #endif /* end of include guard: COMPONENTCONFIG_H */

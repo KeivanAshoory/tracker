@@ -20,16 +20,16 @@
 
 #define CONFIGLOADER_H
 
-#include "ConfigNode.h"
+#include "ConfigElement.h"
 
 class ConfigLoader
 {
     public:
         virtual ~ConfigLoader() = 0;
 
-        ConfigNode* getConfig(void) const;
+        ConfigElement* getConfig(void) const;
         //Factory Method design pattern
-        virtual ConfigNode* loadConfig(void) const = 0;
+        virtual ConfigElement* loadConfig(void) const = 0;
 
     protected:
         ConfigLoader();

@@ -17,7 +17,7 @@
  */
 
 #include <cassert>
-#include "XmlConfigNode.h"
+#include "XmlConfigElement.h"
 #include "XmlConfigLoader.h"
 
 XmlConfigLoader::XmlConfigLoader()
@@ -30,10 +30,10 @@ XmlConfigLoader::~XmlConfigLoader()
 
 }
 
-ConfigNode* XmlConfigLoader::loadConfig(void) const
+ConfigElement* XmlConfigLoader::loadConfig(void) const
 {
     assert(0);  // Not implemented!
-    ConfigNode* pConfigNode = new XmlConfigNode();
-    assert(pConfigNode);
-    return pConfigNode;
+    ConfigElement* pConfigElement = new XmlConfigElement();
+    assert(pConfigElement);
+    return pConfigElement;
 }

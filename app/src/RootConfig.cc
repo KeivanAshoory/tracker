@@ -20,10 +20,10 @@
 #include "Config.h"
 #include "RootConfig.h"
 
-RootConfig::RootConfig(ConfigNode* pConfigNode) :
-    ComponentConfig(pConfigNode)
+RootConfig::RootConfig(ConfigElement* pConfigElement) :
+    ComponentConfig(pConfigElement)
 {
-    //TODO Is it necessary to validate ConfigNode?! e.g. whether it is map?
+    //TODO Is it necessary to validate ConfigElement?! e.g. whether it is map?
 }
 
 RootConfig::~RootConfig()
@@ -34,8 +34,8 @@ RootConfig::~RootConfig()
 template <typename T>
 T RootConfig::getConfig()
 {
-    ConfigNode* pConfigElement =
-        mpConfigNode->getElement(Config::getElementTag<T>());
+    ConfigElement* pConfigElement =
+        mpConfigElement->getElement(Config::getElementTag<T>());
 
     if(!pConfigElement) {
         // Cannot load the configuration element!
