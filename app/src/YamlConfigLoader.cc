@@ -37,9 +37,9 @@ ConfigElement* YamlConfigLoader::loadConfig(void) const
     YAML::Node rootYamlNode = YAML::LoadFile("config.yaml");
 
     if(rootYamlNode.IsNull()) {
+        // TODO Log it!
         return NULL;
     }
-    //TODO should be completed
 
-   return new YamlConfigElement(rootYamlNode);
+    return new YamlConfigElement(rootYamlNode);
 }

@@ -18,6 +18,7 @@
 
 #include "Config.h"
 #include "ClientManagerConfig.h"
+#include "ClientsConfig.h"
 
 const std::string Config::ELEMENT_TAG_APPLICATION = "Application";
 const std::string Config::ELEMENT_TAG_CLIENT_MANAGER = "ClientManager";
@@ -30,4 +31,10 @@ template <>
 std::string Config::getElementTag<ClientManagerConfig>()
 {
     return ELEMENT_TAG_CLIENT_MANAGER;
+}
+
+template <>
+std::string Config::getElementTag<ClientsConfig>()
+{
+    return ELEMENT_TAG_CLIENTS;
 }

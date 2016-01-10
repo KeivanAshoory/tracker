@@ -35,5 +35,7 @@ bool YamlConfigElement::hasElement(const std::string& elementTag) const
 
 ConfigElement* YamlConfigElement::getElement(const std::string& elementTag) const
 {
+
+
     return NULL;
 }

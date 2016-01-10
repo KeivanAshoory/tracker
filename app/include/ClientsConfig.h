@@ -1,12 +1,12 @@
 /*
  * =============================================================================
  *
- *       Filename:  RootConfig.h
+ *       Filename:  ClientsConfig.h
  *
- *    Description:  Root configuration
+ *    Description:  ClientsConfig
  *
  *        Version:  1.0
- *        Created:  27/12/15 21:02:23
+ *        Created:  27/12/15 19:14:49
  *       Revision:  none
  *       Compiler:  gcc
  *
@@ -16,24 +16,25 @@
  * =============================================================================
  */
 
-#ifndef ROOTCONFIG_H
 
-#define ROOTCONFIG_H
+#ifndef CLIENTSCONFIG_H
 
+#define CLIENTSCONFIG_H
+
+
+#include <string>
 #include <vector>
-#include "ClientConfig.h"
 #include "ConfigElement.h"
 #include "ComponentConfig.h"
 
-class RootConfig : private ComponentConfig
+class ClientsConfig : public ComponentConfig
 {
     public:
-        RootConfig(ConfigElement* pConfigElement);
-        ~RootConfig();
+        ClientsConfig(ConfigElement* pConfigElement);
+        ~ClientsConfig();
 
-        template <typename T> 
-            T getConfig();
-
+        std::string getXXX() const;
 };
 
-#endif /* end of include guard: ROOTCONFIG_H */
+
+#endif /* end of include guard: CLIENTSCONFIG_H */

@@ -18,6 +18,8 @@
 
 #include <stdlib.h>
 #include "Config.h"
+#include "ClientManagerConfig.h"
+#include "ClientsConfig.h"
 #include "RootConfig.h"
 
 RootConfig::RootConfig(ConfigElement* pConfigElement) :
@@ -47,4 +49,4 @@ T RootConfig::getConfig()
 }
 
 template ClientManagerConfig RootConfig::getConfig();
-
+template ClientsConfig RootConfig::getConfig();
