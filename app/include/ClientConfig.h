@@ -22,13 +22,13 @@
 
 #include <string>
 #include <vector>
-#include "ConfigElement.h"
+#include "ConfigSegment.h"
 #include "ComponentConfig.h"
 
 class ClientConfig : private ComponentConfig
 {
     public:
-        ClientConfig(ConfigElement* pConfigElement);
+        ClientConfig(ConfigSegment* pConfigSegment);
         ~ClientConfig();
 
         std::string getClientType() const;

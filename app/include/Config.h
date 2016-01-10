@@ -24,15 +24,15 @@
 class Config
 {
     public:
-        static const std::string ELEMENT_TAG_APPLICATION;
-        static const std::string ELEMENT_TAG_CLIENT_MANAGER;
-        static const std::string ELEMENT_TAG_GENERAL_COMMANDER;
-        static const std::string ELEMENT_TAG_GENERAL_MONITOR;
-        static const std::string ELEMENT_TAG_GENERAL_POSITION_HANDLER;
-        static const std::string ELEMENT_TAG_CLIENTS;
+        static const std::string SEGMENT_TAG_APPLICATION;
+        static const std::string SEGMENT_TAG_CLIENT_MANAGER;
+        static const std::string SEGMENT_TAG_GENERAL_COMMANDER;
+        static const std::string SEGMENT_TAG_GENERAL_MONITOR;
+        static const std::string SEGMENT_TAG_GENERAL_POSITION_HANDLER;
+        static const std::string SEGMENT_TAG_CLIENTS;
 
         template <typename T>
-            static std::string getElementTag();
+            static std::string getSegmentTag();
 };
 
 #endif /* end of include guard: CONFIG_H */

@@ -29,7 +29,7 @@ class XmlConfigLoader : public ConfigLoader
         ~XmlConfigLoader();
 
         // Implement ConfigLoader
-        ConfigElement* loadConfig(void) const;
+        ConfigSegment* loadConfig(void) const;
 };
 
 #endif /* end of include guard: XMLCONFIGLOADER_H */

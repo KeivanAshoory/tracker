@@ -18,8 +18,8 @@
 
 #include "ClientsConfig.h"
 
-ClientsConfig::ClientsConfig(ConfigElement* pConfigElement) : 
-    ComponentConfig(pConfigElement)
+ClientsConfig::ClientsConfig(ConfigSegment* pConfigSegment) : 
+    ComponentConfig(pConfigSegment)
 {
 
 }

@@ -18,8 +18,8 @@
 
 #include "ClientManagerConfig.h"
 
-ClientManagerConfig::ClientManagerConfig(ConfigElement* pConfigElement) : 
-    ComponentConfig(pConfigElement)
+ClientManagerConfig::ClientManagerConfig(ConfigSegment* pConfigSegment) : 
+    ComponentConfig(pConfigSegment)
 {
 
 }

@@ -22,8 +22,9 @@
 #include "Logger.h"
 #include "ConfigLoaderFactory.h"
 #include "ConfigLoader.h"
-#include "ConfigElement.h"
+#include "ConfigSegment.h"
 #include "RootConfig.h"
+#include "ClientManagerConfig.h"
 #include "Application.h"
 
 Application* Application::mInstance = 0;
@@ -70,16 +71,16 @@ void Application::onStart(void)
     ConfigLoader* pConfigLoader = 
         ConfigLoaderFactory::create(ConfigLoaderFactory::YAML_CONFIG_LOADER);
 
-    ConfigElement* pRootConfigElement = pConfigLoader->getConfig();
+    ConfigSegment* pRootConfigSegment = pConfigLoader->getConfig();
     delete pConfigLoader;
 
-    if(!pRootConfigElement) {
+    if(!pRootConfigSegment) {
         // Cannot load the configuration file!
         // TODO Log something!
         exit(-1);   //TODO do something based on guideline
     }
 
-    RootConfig rootConfig(pRootConfigElement);
+    RootConfig rootConfig(pRootConfigSegment);
 
     ClientManagerConfig clientManagerConfig =
         rootConfig.getConfig<ClientManagerConfig>();

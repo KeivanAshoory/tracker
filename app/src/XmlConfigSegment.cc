@@ -1,9 +1,9 @@
 /*
  * =============================================================================
  *
- *       Filename:  XmlConfigElement.cc
+ *       Filename:  XmlConfigSegment.cc
  *
- *    Description:  Xml configuration element concrete class
+ *    Description:  Xml configuration segment concrete class
  *
  *        Version:  1.0
  *        Created:  28/12/15 12:03:02
@@ -17,24 +17,24 @@
  */
 
 #include <cassert>
-#include "XmlConfigElement.h"
+#include "XmlConfigSegment.h"
 
-XmlConfigElement::XmlConfigElement()
+XmlConfigSegment::XmlConfigSegment()
 {
     assert(0);  // Not Imlemented!
 }
 
-XmlConfigElement::~XmlConfigElement()
+XmlConfigSegment::~XmlConfigSegment()
 {
 
 }
 
-bool XmlConfigElement::hasElement(const std::string& elementTag) const
+bool XmlConfigSegment::hasSegment(const std::string& segmentTag) const
 {
     return false;
 }
 
-ConfigElement* XmlConfigElement::getElement(const std::string& elementTag) const
+ConfigSegment* XmlConfigSegment::getSegment(const std::string& segmentTag) const
 {
     return NULL;
 }

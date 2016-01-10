@@ -1,9 +1,9 @@
 /*
  * =============================================================================
  *
- *       Filename:  YamlConfigElement.cc
+ *       Filename:  YamlConfigSegment.cc
  *
- *    Description:  Yaml configuration element concrete class
+ *    Description:  Yaml configuration segment concrete class
  *
  *        Version:  1.0
  *        Created:  28/12/15 11:57:25
@@ -16,24 +16,24 @@
  * =============================================================================
  */
 
-#include "YamlConfigElement.h"
+#include "YamlConfigSegment.h"
 
-YamlConfigElement::YamlConfigElement(YAML::Node yamlNode) : mYamlNode(yamlNode)
+YamlConfigSegment::YamlConfigSegment(YAML::Node yamlNode) : mYamlNode(yamlNode)
 {
     assert(!yamlNode.IsNull());
 }
 
-YamlConfigElement::~YamlConfigElement()
+YamlConfigSegment::~YamlConfigSegment()
 {
 
 }
 
-bool YamlConfigElement::hasElement(const std::string& elementTag) const
+bool YamlConfigSegment::hasSegment(const std::string& segmentTag) const
 {
     return false;
 }
 
-ConfigElement* YamlConfigElement::getElement(const std::string& elementTag) const
+ConfigSegment* YamlConfigSegment::getSegment(const std::string& segmentTag) const
 {
 
 

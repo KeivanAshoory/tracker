@@ -20,21 +20,21 @@
 #include "ClientManagerConfig.h"
 #include "ClientsConfig.h"
 
-const std::string Config::ELEMENT_TAG_APPLICATION = "Application";
-const std::string Config::ELEMENT_TAG_CLIENT_MANAGER = "ClientManager";
-const std::string Config::ELEMENT_TAG_GENERAL_COMMANDER = "GeneralCommander";
-const std::string Config::ELEMENT_TAG_GENERAL_MONITOR = "GeneralMonitor";
-const std::string Config::ELEMENT_TAG_GENERAL_POSITION_HANDLER = "GeneralPositionHandler";
-const std::string Config::ELEMENT_TAG_CLIENTS = "Clients";
+const std::string Config::SEGMENT_TAG_APPLICATION = "Application";
+const std::string Config::SEGMENT_TAG_CLIENT_MANAGER = "ClientManager";
+const std::string Config::SEGMENT_TAG_GENERAL_COMMANDER = "GeneralCommander";
+const std::string Config::SEGMENT_TAG_GENERAL_MONITOR = "GeneralMonitor";
+const std::string Config::SEGMENT_TAG_GENERAL_POSITION_HANDLER = "GeneralPositionHandler";
+const std::string Config::SEGMENT_TAG_CLIENTS = "Clients";
 
 template <>
-std::string Config::getElementTag<ClientManagerConfig>()
+std::string Config::getSegmentTag<ClientManagerConfig>()
 {
-    return ELEMENT_TAG_CLIENT_MANAGER;
+    return SEGMENT_TAG_CLIENT_MANAGER;
 }
 
 template <>
-std::string Config::getElementTag<ClientsConfig>()
+std::string Config::getSegmentTag<ClientsConfig>()
 {
-    return ELEMENT_TAG_CLIENTS;
+    return SEGMENT_TAG_CLIENTS;
 }

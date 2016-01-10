@@ -18,7 +18,7 @@
 
 #include <cassert>
 #include <yaml-cpp/yaml.h>
-#include "YamlConfigElement.h"
+#include "YamlConfigSegment.h"
 #include "YamlConfigLoader.h"
 
 YamlConfigLoader::YamlConfigLoader()
@@ -31,7 +31,7 @@ YamlConfigLoader::~YamlConfigLoader()
 
 }
 
-ConfigElement* YamlConfigLoader::loadConfig(void) const
+ConfigSegment* YamlConfigLoader::loadConfig(void) const
 {
     //TODO remember to handle exception
     YAML::Node rootYamlNode = YAML::LoadFile("config.yaml");
@@ -41,5 +41,5 @@ ConfigElement* YamlConfigLoader::loadConfig(void) const
         return NULL;
     }
 
-    return new YamlConfigElement(rootYamlNode);
+    return new YamlConfigSegment(rootYamlNode);
 }

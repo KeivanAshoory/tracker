@@ -22,13 +22,13 @@
 
 #include <vector>
 #include "ClientConfig.h"
-#include "ConfigElement.h"
+#include "ConfigSegment.h"
 #include "ComponentConfig.h"
 
 class RootConfig : private ComponentConfig
 {
     public:
-        RootConfig(ConfigElement* pConfigElement);
+        RootConfig(ConfigSegment* pConfigSegment);
         ~RootConfig();
 
         template <typename T> 
