@@ -1,0 +1,30 @@
+%YAML 1.2
+# tracker application configuration file
+---
+Application:
+    testParam: t1234
+
+ClientManager:
+    maximumClientNumber: 10
+    minimumClientNumber: 1
+
+Clients:
+    - 
+      type: console
+      capabilities:
+          - monitor
+          - commander
+
+    - 
+      type: push button
+      capabilities:
+          - commander
+          - position handler
+          - monitor
+      remote:
+          ip: 123.124.125.16
+          port: 1234
+          host: www.eee.ccc
+
+
+...
