@@ -21,6 +21,9 @@
 ClientsConfig::ClientsConfig(ConfigSegment* pConfigSegment) : 
     ComponentConfig(pConfigSegment)
 {
+        // ***** BE CAREFULL OF MEMORY THAT YamlConfigSegment::getSegmentArray
+        // if you create ComponentConfig from each member it is okay. UNLESS
+        // NOT!!
 
 }
 

@@ -21,6 +21,7 @@
 #define XMLCONFIGSEGMENT_H
 
 #include "ConfigSegment.h"
+#include <vector>
 
 class XmlConfigSegment : public ConfigSegment
 {
@@ -29,7 +30,29 @@ class XmlConfigSegment : public ConfigSegment
         ~XmlConfigSegment();
 
         bool hasSegment(const std::string& segmentTag) const;
+        bool hasProperty(const std::string& propertyTag) const;
+        bool hasSegmentArray() const;
+
         ConfigSegment* getSegment(const std::string& segmentTag) const;
+        std::vector<ConfigSegment*> getSegmentArray() const;
+
+        void getProperty(const std::string& propertyTag,
+                std::string& value) const;
+        void getProperty(const std::string& propertyTag,
+                int& value) const;
+        void getProperty(const std::string& propertyTag,
+                double& value) const;
+        void getProperty(const std::string& propertyTag,
+                bool& value) const;
+        
+        void getProperty(const std::string& propertyTag,
+                std::vector<std::string>& value) const;
+        void getProperty(const std::string& propertyTag,
+                std::vector<int>& value) const;
+        void getProperty(const std::string& propertyTag,
+                std::vector<double>& value) const;
+        void getProperty(const std::string& propertyTag,
+                std::vector<bool>& value) const;
 };
 
 #endif /* end of include guard: XMLCONFIGSEGMENT_H */

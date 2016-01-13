@@ -47,6 +47,23 @@ int main()
 
     Logger::info("tracker started.");
 
+    Application* ppppApp = Application::getInstance();
+    ppppApp->configTest();
+
+
+
+
+
+
+
+
+
+    return 0;
+
+
+
+
+
     VK162 gps;
     gps.setSerialDevice("/dev/ttySAC1");
     if(!gps.openSerial(VK162::Asynchronous)) {

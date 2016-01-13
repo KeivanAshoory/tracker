@@ -1,8 +1,11 @@
 %YAML 1.2
 # tracker application configuration file
 ---
+ConfigVersion: 0.1
+
 Application:
-    testParam: t1234
+    Name: tracker
+    Version: 12
 
 ClientManager:
     maximumClientNumber: 10
@@ -25,6 +28,4 @@ Clients:
           ip: 123.124.125.16
           port: 1234
           host: www.eee.ccc
-
-
 ...

@@ -34,7 +34,64 @@ bool XmlConfigSegment::hasSegment(const std::string& segmentTag) const
     return false;
 }
 
+bool XmlConfigSegment::hasProperty(const std::string& propertyTag) const
+{
+    return false;
+}
+
+bool XmlConfigSegment::hasSegmentArray() const
+{
+    return false;
+}
+
 ConfigSegment* XmlConfigSegment::getSegment(const std::string& segmentTag) const
 {
     return NULL;
 }
+
+std::vector<ConfigSegment*> XmlConfigSegment::getSegmentArray() const
+{
+    std::vector<ConfigSegment*> configSegments;
+    return configSegments;
+}
+
+void XmlConfigSegment::getProperty(
+        const std::string& propertyTag, std::string& value) const
+{
+}
+
+void XmlConfigSegment::getProperty(
+        const std::string& propertyTag, int& value) const
+{
+}
+
+void XmlConfigSegment::getProperty(
+        const std::string& propertyTag, double& value) const
+{
+}
+
+void XmlConfigSegment::getProperty(
+        const std::string& propertyTag, bool& value) const
+{
+}
+
+void XmlConfigSegment::getProperty(
+        const std::string& propertyTag, std::vector<std::string>& value) const
+{
+}
+
+void XmlConfigSegment::getProperty(
+        const std::string& propertyTag, std::vector<int>& value) const
+{
+}
+
+void XmlConfigSegment::getProperty(
+        const std::string& propertyTag, std::vector<double>& value) const
+{
+}
+
+void XmlConfigSegment::getProperty(
+        const std::string& propertyTag, std::vector<bool>& value) const
+{
+}
+

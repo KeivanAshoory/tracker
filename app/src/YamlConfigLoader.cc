@@ -34,7 +34,7 @@ YamlConfigLoader::~YamlConfigLoader()
 ConfigSegment* YamlConfigLoader::loadConfig(void) const
 {
     //TODO remember to handle exception
-    YAML::Node rootYamlNode = YAML::LoadFile("config.yaml");
+    YAML::Node rootYamlNode = YAML::LoadFile("./tracker.yaml");
 
     if(rootYamlNode.IsNull()) {
         // TODO Log it!

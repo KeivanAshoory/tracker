@@ -19,7 +19,9 @@
 #include <cassert>
 #include <new>
 #include <stdlib.h>
+#include <vector>
 #include "Logger.h"
+#include "Config.h"
 #include "ConfigLoaderFactory.h"
 #include "ConfigLoader.h"
 #include "ConfigSegment.h"
@@ -124,4 +126,128 @@ void Application::onTerminate(void)
 
     //TODO: Do more work here!
     mIsStarted = false;
+}
+
+void Application::configTest(void)
+{
+    ConfigSegment* puut;
+
+    ConfigLoader* pConfigLoader = 
+        ConfigLoaderFactory::create(ConfigLoaderFactory::YAML_CONFIG_LOADER);
+
+    ConfigSegment* pRootConfigSegment = pConfigLoader->getConfig();
+    delete pConfigLoader;
+
+
+    puut = pRootConfigSegment;
+
+    assert(puut);
+
+
+    assert(puut->hasSegment("Application"));
+    assert(puut->hasSegment("ClientManager"));
+    assert(puut->hasSegment("Clients"));
+    assert(puut->hasProperty("ConfigVersion"));
+    assert(!puut->hasSegmentArray());
+    assert(!puut->hasSegment("ClientsAAAA"));
+    
+    std::string confVersion;
+    confVersion =
+        puut->getProperty<std::string>("ConfigVersion", "www");
+    assert(confVersion=="0.1");
+
+    confVersion =
+        puut->getProperty<std::string>("ConfigVersionsss", "www");
+    assert(confVersion=="www");
+
+////////////////////////////////////////////////////////////////
+    puut = pRootConfigSegment->getSegment("Application");
+    
+    assert(!puut->hasSegment("Name"));
+    assert(!puut->hasSegment("Version"));
+    assert(puut->hasProperty("Name"));
+    assert(puut->hasProperty("Version"));
+    assert(!puut->hasSegmentArray());
+    assert(!puut->hasProperty("Versioniiiii"));
+    
+    std::string name;
+    name =
+        puut->getProperty<std::string>("Name", "www");
+    assert(name=="tracker");
+
+    name =
+        puut->getProperty<std::string>("Nameii", "www");
+    assert(name=="www");
+
+    int version;
+    version = puut->getProperty<int>("Version", 55);
+    assert(version==12);
+
+    version = puut->getProperty<int>("Versioniiii", 55);
+    assert(version==55);
+
+////////////////////////////////////////////////////////////////
+    puut = pRootConfigSegment->getSegment("ClientManager");
+    
+    assert(!puut->hasSegment("maximumClientNumber"));
+    assert(!puut->hasSegment("minimumClientNumber"));
+    assert(puut->hasProperty("maximumClientNumber"));
+    assert(puut->hasProperty("minimumClientNumber"));
+    assert(!puut->hasSegmentArray());
+    assert(!puut->hasProperty("wwwwwww"));
+    
+    int num;
+    num = puut->getProperty<int>("maximumClientNumber", 66);
+    assert(num==10);
+    num = puut->getProperty<int>("minimumClientNumber", 77);
+    assert(num==1);
+
+////////////////////////////////////////////////////////////////
+    puut = pRootConfigSegment->getSegment("Clients");
+    
+    assert(!puut->hasSegment("type"));
+    assert(!puut->hasSegment("capabilities"));
+    assert(!puut->hasProperty("type"));
+    assert(!puut->hasProperty("capabilities"));
+    assert(puut->hasSegmentArray());
+    
+    std::vector<ConfigSegment*> psegments;
+    psegments = puut->getSegmentArray();
+
+////////////////////////////////////////////////////////////////
+    puut = psegments[0];
+
+    assert(!puut->hasSegment("type"));
+    assert(puut->hasProperty("type"));
+    assert(puut->hasProperty("capabilities"));
+    assert(!puut->hasSegmentArray());
+    assert(!puut->hasProperty("wwwwwww"));
+    
+    assert(puut->getProperty<std::string>("type") == "console");
+    assert(puut->getProperty<std::vector<std::string> >("capabilities")[0]
+            == "monitor");
+    assert(puut->getProperty<std::vector<std::string> >("capabilities")[1]
+            == "commander");
+
+
+////////////////////////////////////////////////////////////////
+    puut = psegments[1];
+
+    assert(!puut->hasSegment("type"));
+    assert(puut->hasProperty("type"));
+    assert(puut->hasProperty("capabilities"));
+    assert(puut->hasProperty("remote"));
+    assert(!puut->hasSegmentArray());
+    assert(!puut->hasProperty("wwwwwww"));
+    
+    assert(puut->getProperty<std::string>("type") == "push button");
+    assert(puut->getProperty<std::vector<std::string> >("capabilities")[0]
+            == "commander");
+    assert(puut->getProperty<std::vector<std::string> >("capabilities")[1]
+            == "position handler");
+    assert(puut->getProperty<std::vector<std::string> >("capabilities")[2]
+            == "monitor");
+
+
+
 }

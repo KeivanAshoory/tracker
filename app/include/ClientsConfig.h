@@ -33,6 +33,9 @@ class ClientsConfig : public ComponentConfig
         ClientsConfig(ConfigSegment* pConfigSegment);
         ~ClientsConfig();
 
+        // ***** BE CAREFULL OF MEMORY THAT YamlConfigSegment::getSegmentArray
+        // if you create ComponentConfig from each member it is okay. UNLESS
+        // NOT!!
         std::string getXXX() const;
 };
 

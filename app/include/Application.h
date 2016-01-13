@@ -36,6 +36,7 @@ class Application
 
         bool isStarted(void);
 
+        void configTest(void);
     protected:
         Application();
 
