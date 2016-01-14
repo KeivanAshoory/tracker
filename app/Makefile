@@ -1,8 +1,14 @@
 CROSS = arm-linux-
 CC = g++
-CFLAGS = -g -Wall
+
+SRCEXT = cc
+HDREXT = h
+
 SRCDIR = src
+HDRDIR = include
 BUILDDIR = build
+DEPDIR = dep
+
 ifndef CROSS
 	ROOT = /.
 	TARGET = ./bin/tracker
@@ -13,26 +19,46 @@ else
 	PREFIX = $(ROOT)/usr
 endif
 
-SRCEXT = cc
+$(shell mkdir -p $(SRCDIR) >/dev/null)
+$(shell mkdir -p $(HDRDIR) >/dev/null)
+$(shell mkdir -p $(BUILDDIR) >/dev/null)
+$(shell mkdir -p $(DEPDIR) >/dev/null)
+
 SOURCES = $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS = $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 LIB = -L $(PREFIX)/lib -lyaml-cpp
-INC = -I./include -I $(PREFIX)/include
+INC = -I$(HDRDIR) -I $(PREFIX)/include
+
+CFLAGS = -g -Wall
+DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.Td
+
+
 
 $(TARGET): $(OBJECTS)
 	@echo " Linking..."
-	@echo " $(CROSS)$(CC) $^ -o $(TARGET) $(LIB)"; $(CROSS)$(CC) $^ -o $(TARGET) $(LIB)
+	@echo " $(CROSS)$(CC) $^ -o $(TARGET) $(LIB)";
+	$(CROSS)$(CC) $^ -o $(TARGET) $(LIB)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
+$(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT) $(DEPDIR)/%.d
 	@mkdir -p $(BUILDDIR)
-	@echo " $(CROSS)$(CC) $(CFLAGS) $(INC) -c -o $@ $<"; $(CROSS)$(CC) $(CFLAGS) $(INC) -c -o $@ $<
+	@echo " $(CROSS)$(CC) $(DEPFLAGS) $(CFLAGS) $(INC) -c -o $@ $<";
+	$(CROSS)$(CC) $(DEPFLAGS) $(CFLAGS) $(INC) -c -o $@ $<
+	mv -f $(DEPDIR)/$*.Td $(DEPDIR)/$*.d
+
 
 clean:
 	@echo " Cleaning...";
-	@echo " $(RM) -r $(BUILDDIR) $(TARGET)"; $(RM) -r $(BUILDDIR) $(TARGET)
+	@echo " $(RM) -r $(BUILDDIR) $(TARGET) $(DEPDIR)"; $(RM) -r $(BUILDDIR) $(TARGET) $(DEPDIR)
 
-# Tests
+
 tester:
 	$(CROSS)$(CC) $(CFLAGS) test/tester.cpp $(INC) $(LIB) -o bin/tester
 
 .PHONY: clean
+
+$(DEPDIR)/%.d: ;
+.PRECIOUS: $(DEPDIR)/%.d
+
+-include $(patsubst $(SRCDIR)/%,$(DEPDIR)/%.d,$(basename $(SOURCES)))
+
