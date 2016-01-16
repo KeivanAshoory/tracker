@@ -19,11 +19,6 @@ else
 	PREFIX = $(ROOT)/usr
 endif
 
-$(shell mkdir -p $(SRCDIR) >/dev/null)
-$(shell mkdir -p $(HDRDIR) >/dev/null)
-$(shell mkdir -p $(BUILDDIR) >/dev/null)
-$(shell mkdir -p $(DEPDIR) >/dev/null)
-
 SOURCES = $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS = $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 LIB = -L $(PREFIX)/lib -lyaml-cpp
@@ -33,27 +28,27 @@ CFLAGS = -g -Wall
 DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.Td
 
 
-
 $(TARGET): $(OBJECTS)
 	@echo " Linking..."
-	@echo " $(CROSS)$(CC) $^ -o $(TARGET) $(LIB)";
 	$(CROSS)$(CC) $^ -o $(TARGET) $(LIB)
+
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT) $(DEPDIR)/%.d
-	@mkdir -p $(BUILDDIR)
-	@echo " $(CROSS)$(CC) $(DEPFLAGS) $(CFLAGS) $(INC) -c -o $@ $<";
+	$(shell mkdir -p $(BUILDDIR) >/dev/null)
+	$(shell mkdir -p $(DEPDIR) >/dev/null)
 	$(CROSS)$(CC) $(DEPFLAGS) $(CFLAGS) $(INC) -c -o $@ $<
-	mv -f $(DEPDIR)/$*.Td $(DEPDIR)/$*.d
+	@mv -f $(DEPDIR)/$*.Td $(DEPDIR)/$*.d
 
 
 clean:
 	@echo " Cleaning...";
-	@echo " $(RM) -r $(BUILDDIR) $(TARGET) $(DEPDIR)"; $(RM) -r $(BUILDDIR) $(TARGET) $(DEPDIR)
+	$(RM) -r $(BUILDDIR) $(TARGET) $(DEPDIR)
 
 
 tester:
 	$(CROSS)$(CC) $(CFLAGS) test/tester.cpp $(INC) $(LIB) -o bin/tester
+
 
 .PHONY: clean
 
