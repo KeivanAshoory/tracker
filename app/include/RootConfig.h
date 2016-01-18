@@ -17,7 +17,6 @@
  */
 
 #ifndef ROOTCONFIG_H
-
 #define ROOTCONFIG_H
 
 #include <vector>
@@ -31,8 +30,10 @@ class RootConfig : private ComponentConfig
         RootConfig(ConfigSegment* pConfigSegment);
         ~RootConfig();
 
+        std::string getConfigVersion() const;
+
         template <typename T> 
-            T getConfig();
+            T getConfig() const;
 
 };
 

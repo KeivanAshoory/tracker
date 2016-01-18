@@ -17,6 +17,7 @@
  */
 
 #include "ClientManagerConfig.h"
+#include "Config.h"
 
 ClientManagerConfig::ClientManagerConfig(ConfigSegment* pConfigSegment) : 
     ComponentConfig(pConfigSegment)
@@ -29,7 +30,8 @@ ClientManagerConfig::~ClientManagerConfig()
 
 }
 
-std::string ClientManagerConfig::getXXX() const
+std::size_t ClientManagerConfig::getMaximumClientNumber() const
 {
-    return "";
+    return mpConfigSegment->getProperty<int>(
+            Config::PROPERTY_TAG_CLIENT_MANAGER_MAX_CLIENT_NUMBER, 1);
 }

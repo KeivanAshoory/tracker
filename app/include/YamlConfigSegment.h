@@ -29,6 +29,7 @@ class YamlConfigSegment : public ConfigSegment
     public:
         YamlConfigSegment(YAML::Node yamlNode);
         ~YamlConfigSegment();
+        YamlConfigSegment* clone() const;
 
         bool hasSegment(const std::string& segmentTag) const;
         bool hasProperty(const std::string& propertyTag) const;

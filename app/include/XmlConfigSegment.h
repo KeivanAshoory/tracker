@@ -28,6 +28,7 @@ class XmlConfigSegment : public ConfigSegment
     public:
         XmlConfigSegment();
         ~XmlConfigSegment();
+        XmlConfigSegment* clone() const;
 
         bool hasSegment(const std::string& segmentTag) const;
         bool hasProperty(const std::string& propertyTag) const;

@@ -64,11 +64,11 @@ void ClientManager::createClients(const string& clientsSpec)
 Client* ClientManager::createClient(const string& clientSpec)
 {
     if(clientSpec == "Console") {
-        Client* pClient = ClientFactory::create(ClientFactory::CONSOLE_CLIENT);
+        Client* pClient = ClientFactory::create(Client::Console);
         return pClient;
 
     } else if(clientSpec == "PushButton") {
-        Client* pClient = ClientFactory::create(ClientFactory::PUSH_BUTTON_CLIENT);
+        Client* pClient = ClientFactory::create(Client::PushButton);
         return pClient;
     }
 }

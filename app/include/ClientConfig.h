@@ -17,12 +17,12 @@
  */
 
 #ifndef CLIENTCONFIG_H
-
 #define CLIENTCONFIG_H
 
 #include <string>
 #include <vector>
 #include "ConfigSegment.h"
+#include "Client.h"
 #include "ComponentConfig.h"
 
 class ClientConfig : private ComponentConfig
@@ -31,8 +31,13 @@ class ClientConfig : private ComponentConfig
         ClientConfig(ConfigSegment* pConfigSegment);
         ~ClientConfig();
 
-        std::string getClientType() const;
-        std::vector<std::string> getRoles() const;
+        Client::Type getType() const;
+        std::vector<Client::Role> getRoles() const;
+
+    private:
+        static Client::Type parseType(const std::string& type);
+        static Client::Role parseRole(const std::string& role);
+        static std::string normaliseProperty(const std::string& value);
 };
 
 #endif /* end of include guard: CLIENTCONFIG_H */

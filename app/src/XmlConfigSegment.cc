@@ -29,6 +29,11 @@ XmlConfigSegment::~XmlConfigSegment()
 
 }
 
+XmlConfigSegment* XmlConfigSegment::clone() const
+{
+    return new XmlConfigSegment(*this);
+}
+
 bool XmlConfigSegment::hasSegment(const std::string& segmentTag) const
 {
     return false;

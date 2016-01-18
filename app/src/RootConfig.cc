@@ -19,6 +19,7 @@
 #include <stdlib.h>
 #include "Config.h"
 #include "ClientManagerConfig.h"
+#include "ApplicationConfig.h"
 #include "ClientsConfig.h"
 #include "RootConfig.h"
 
@@ -33,8 +34,14 @@ RootConfig::~RootConfig()
 
 }
 
+std::string RootConfig::getConfigVersion() const
+{
+    return mpConfigSegment->getProperty<std::string>(
+            Config::PROPERTY_TAG_CONFIG_VERSION, "");
+}
+        
 template <typename T>
-T RootConfig::getConfig()
+T RootConfig::getConfig() const
 {
     ConfigSegment* pConfigSegment =
         mpConfigSegment->getSegment(Config::getSegmentTag<T>());
@@ -48,5 +55,6 @@ T RootConfig::getConfig()
     return T(pConfigSegment);
 }
 
-template ClientManagerConfig RootConfig::getConfig();
-template ClientsConfig RootConfig::getConfig();
+template ApplicationConfig RootConfig::getConfig() const;
+template ClientManagerConfig RootConfig::getConfig() const;
+template ClientsConfig RootConfig::getConfig() const;

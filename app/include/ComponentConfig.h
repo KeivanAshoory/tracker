@@ -31,8 +31,12 @@ class ComponentConfig
     protected:
         //TODO copy ctor is most likely needed!
         ComponentConfig(ConfigSegment* pConfigSegment);
+        ComponentConfig(const ComponentConfig& rhs);
+        ComponentConfig& operator=(const ComponentConfig& rhs);
 
         ConfigSegment* mpConfigSegment;
+
+    private:
 };
 
 #endif /* end of include guard: COMPONENTCONFIG_H */

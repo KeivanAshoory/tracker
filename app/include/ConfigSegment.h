@@ -27,6 +27,7 @@ class ConfigSegment
 {
     public:
         virtual ~ConfigSegment() = 0;
+        virtual ConfigSegment* clone() const = 0;
 
         virtual bool hasSegment(const std::string& segmentTag) const = 0;
         virtual bool hasProperty(const std::string& propertyTag) const = 0;

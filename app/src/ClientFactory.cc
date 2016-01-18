@@ -18,16 +18,17 @@
 
 #include "ConsoleClient.h"
 #include "PushButtonClient.h"
+#include "Client.h"
 #include "ClientFactory.h"
 
 using namespace std;
 
-Client* ClientFactory::create(ClientType clientId)
+Client* ClientFactory::create(Client::Type clientType)
 {
-    switch(clientId) {
-        case CONSOLE_CLIENT:
+    switch(clientType) {
+        case Client::Console:
             return new ConsoleClient;
-        case PUSH_BUTTON_CLIENT:
+        case Client::PushButton:
             return new PushButtonClient;
             break;
         default:

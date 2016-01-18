@@ -18,7 +18,6 @@
 
 
 #ifndef CLIENTSCONFIG_H
-
 #define CLIENTSCONFIG_H
 
 
@@ -26,6 +25,7 @@
 #include <vector>
 #include "ConfigSegment.h"
 #include "ComponentConfig.h"
+#include "ClientConfig.h"
 
 class ClientsConfig : public ComponentConfig
 {
@@ -33,11 +33,7 @@ class ClientsConfig : public ComponentConfig
         ClientsConfig(ConfigSegment* pConfigSegment);
         ~ClientsConfig();
 
-        // ***** BE CAREFULL OF MEMORY THAT YamlConfigSegment::getSegmentArray
-        // if you create ComponentConfig from each member it is okay. UNLESS
-        // NOT!!
-        std::string getXXX() const;
+        std::vector<ClientConfig> getClientConfigs() const;
 };
-
 
 #endif /* end of include guard: CLIENTSCONFIG_H */

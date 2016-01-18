@@ -26,8 +26,8 @@ class ConfigLoaderFactory
 {
     public:
         enum ConfigLoderType {
-            YAML_CONFIG_LOADER,
-            XML_CONFIG_LOADER
+            YamlLoader,
+            XmlLoader
         };
 
         static ConfigLoader* create(ConfigLoderType loaderType);

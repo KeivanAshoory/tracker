@@ -25,12 +25,7 @@
 class ClientFactory
 {
     public:
-        enum ClientType {
-            CONSOLE_CLIENT,
-            PUSH_BUTTON_CLIENT
-        };
-
-        static Client* create(ClientType clientiId);
+        static Client* create(Client::Type clientiType);
 };
 
 #endif

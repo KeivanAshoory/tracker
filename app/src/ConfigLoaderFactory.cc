@@ -26,9 +26,9 @@ using namespace std;
 ConfigLoader* ConfigLoaderFactory::create(ConfigLoderType loaderType)
 {
     switch(loaderType) {
-        case YAML_CONFIG_LOADER:
+        case YamlLoader:
             return new YamlConfigLoader();
-        case XML_CONFIG_LOADER:
+        case XmlLoader:
             return new XmlConfigLoader();
         default:
             return NULL;

@@ -48,7 +48,7 @@ int main()
     Logger::info("tracker started.");
 
     Application* ppppApp = Application::getInstance();
-    ppppApp->configTest();
+    ppppApp->configTest2();
 
 
 

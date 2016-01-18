@@ -1,26 +1,25 @@
 %YAML 1.2
 # tracker application configuration file
 ---
-ConfigVersion: 0.1
+configVersion: 0.1
 
 Application:
-    Name: tracker
-    Version: 12
+    name: tracker
+    version: 12
 
 ClientManager:
     maximumClientNumber: 10
-    minimumClientNumber: 1
 
 Clients:
     - 
       type: console
-      capabilities:
+      role:
           - monitor
           - commander
 
     - 
       type: push button
-      capabilities:
+      role:
           - commander
           - position handler
           - monitor

@@ -21,13 +21,18 @@
 #include <stdlib.h>
 #include <vector>
 #include "Logger.h"
-#include "Config.h"
 #include "ConfigLoaderFactory.h"
 #include "ConfigLoader.h"
 #include "ConfigSegment.h"
+#include "Config.h"
 #include "RootConfig.h"
+#include "ApplicationConfig.h"
 #include "ClientManagerConfig.h"
+#include "ClientsConfig.h"
+#include "ClientConfig.h"
 #include "Application.h"
+
+using namespace std;
 
 Application* Application::mInstance = 0;
 
@@ -36,12 +41,12 @@ Application::Application() :
     mpGeneralPositionHandler(NULL), mpClientManager(NULL),
     mIsStarted(false)
 {
-    Logger::info("Application::ctor");
+    Logger::debug("Application::ctor");
 }
 
 Application::~Application()
 {
-    Logger::info("Application::dtor");
+    Logger::debug("Application::dtor");
     onTerminate();
 }
 
@@ -71,7 +76,7 @@ void Application::onStart(void)
 
     // 1) Read configuration
     ConfigLoader* pConfigLoader = 
-        ConfigLoaderFactory::create(ConfigLoaderFactory::YAML_CONFIG_LOADER);
+        ConfigLoaderFactory::create(ConfigLoaderFactory::YamlLoader);
 
     ConfigSegment* pRootConfigSegment = pConfigLoader->getConfig();
     delete pConfigLoader;
@@ -133,7 +138,7 @@ void Application::configTest(void)
     ConfigSegment* puut;
 
     ConfigLoader* pConfigLoader = 
-        ConfigLoaderFactory::create(ConfigLoaderFactory::YAML_CONFIG_LOADER);
+        ConfigLoaderFactory::create(ConfigLoaderFactory::YamlLoader);
 
     ConfigSegment* pRootConfigSegment = pConfigLoader->getConfig();
     delete pConfigLoader;
@@ -147,68 +152,64 @@ void Application::configTest(void)
     assert(puut->hasSegment("Application"));
     assert(puut->hasSegment("ClientManager"));
     assert(puut->hasSegment("Clients"));
-    assert(puut->hasProperty("ConfigVersion"));
+    assert(puut->hasProperty("configVersion"));
     assert(!puut->hasSegmentArray());
     assert(!puut->hasSegment("ClientsAAAA"));
     
     std::string confVersion;
     confVersion =
-        puut->getProperty<std::string>("ConfigVersion", "www");
+        puut->getProperty<std::string>("configVersion", "www");
     assert(confVersion=="0.1");
 
     confVersion =
-        puut->getProperty<std::string>("ConfigVersionsss", "www");
+        puut->getProperty<std::string>("configVersionsss", "www");
     assert(confVersion=="www");
 
 ////////////////////////////////////////////////////////////////
     puut = pRootConfigSegment->getSegment("Application");
     
-    assert(!puut->hasSegment("Name"));
-    assert(!puut->hasSegment("Version"));
-    assert(puut->hasProperty("Name"));
-    assert(puut->hasProperty("Version"));
+    assert(!puut->hasSegment("name"));
+    assert(!puut->hasSegment("version"));
+    assert(puut->hasProperty("name"));
+    assert(puut->hasProperty("version"));
     assert(!puut->hasSegmentArray());
-    assert(!puut->hasProperty("Versioniiiii"));
+    assert(!puut->hasProperty("versioniiiii"));
     
     std::string name;
     name =
-        puut->getProperty<std::string>("Name", "www");
+        puut->getProperty<std::string>("name", "www");
     assert(name=="tracker");
 
     name =
-        puut->getProperty<std::string>("Nameii", "www");
+        puut->getProperty<std::string>("nameii", "www");
     assert(name=="www");
 
     int version;
-    version = puut->getProperty<int>("Version", 55);
+    version = puut->getProperty<int>("version", 55);
     assert(version==12);
 
-    version = puut->getProperty<int>("Versioniiii", 55);
+    version = puut->getProperty<int>("versioniiii", 55);
     assert(version==55);
 
 ////////////////////////////////////////////////////////////////
     puut = pRootConfigSegment->getSegment("ClientManager");
     
     assert(!puut->hasSegment("maximumClientNumber"));
-    assert(!puut->hasSegment("minimumClientNumber"));
     assert(puut->hasProperty("maximumClientNumber"));
-    assert(puut->hasProperty("minimumClientNumber"));
     assert(!puut->hasSegmentArray());
     assert(!puut->hasProperty("wwwwwww"));
     
     int num;
     num = puut->getProperty<int>("maximumClientNumber", 66);
     assert(num==10);
-    num = puut->getProperty<int>("minimumClientNumber", 77);
-    assert(num==1);
 
 ////////////////////////////////////////////////////////////////
     puut = pRootConfigSegment->getSegment("Clients");
     
     assert(!puut->hasSegment("type"));
-    assert(!puut->hasSegment("capabilities"));
+    assert(!puut->hasSegment("role"));
     assert(!puut->hasProperty("type"));
-    assert(!puut->hasProperty("capabilities"));
+    assert(!puut->hasProperty("role"));
     assert(puut->hasSegmentArray());
     
     std::vector<ConfigSegment*> psegments;
@@ -219,14 +220,14 @@ void Application::configTest(void)
 
     assert(!puut->hasSegment("type"));
     assert(puut->hasProperty("type"));
-    assert(puut->hasProperty("capabilities"));
+    assert(puut->hasProperty("role"));
     assert(!puut->hasSegmentArray());
     assert(!puut->hasProperty("wwwwwww"));
     
     assert(puut->getProperty<std::string>("type") == "console");
-    assert(puut->getProperty<std::vector<std::string> >("capabilities")[0]
+    assert(puut->getProperty<std::vector<std::string> >("role")[0]
             == "monitor");
-    assert(puut->getProperty<std::vector<std::string> >("capabilities")[1]
+    assert(puut->getProperty<std::vector<std::string> >("role")[1]
             == "commander");
 
 
@@ -235,18 +236,90 @@ void Application::configTest(void)
 
     assert(!puut->hasSegment("type"));
     assert(puut->hasProperty("type"));
-    assert(puut->hasProperty("capabilities"));
+    assert(puut->hasProperty("role"));
     assert(puut->hasProperty("remote"));
     assert(!puut->hasSegmentArray());
     assert(!puut->hasProperty("wwwwwww"));
     
     assert(puut->getProperty<std::string>("type") == "push button");
-    assert(puut->getProperty<std::vector<std::string> >("capabilities")[0]
+    assert(puut->getProperty<std::vector<std::string> >("role")[0]
             == "commander");
-    assert(puut->getProperty<std::vector<std::string> >("capabilities")[1]
+    assert(puut->getProperty<std::vector<std::string> >("role")[1]
             == "position handler");
-    assert(puut->getProperty<std::vector<std::string> >("capabilities")[2]
+    assert(puut->getProperty<std::vector<std::string> >("role")[2]
             == "monitor");
+
+    std::vector<std::string> jjj = puut->getProperty<std::vector<std::string> >(
+            "typei");
+    std::cout << std::endl << jjj[0] << std::endl;
+
+}
+
+void Application::configTest2(void)
+{
+    ConfigLoader* pConfigLoader = 
+        ConfigLoaderFactory::create(ConfigLoaderFactory::YamlLoader);
+
+    ConfigSegment* pRootConfigSegment = pConfigLoader->getConfig();
+    delete pConfigLoader;
+
+    if(!pRootConfigSegment) {
+        // Cannot load the configuration file!
+        // TODO Log something!
+        exit(-1);   //TODO do something based on guideline
+    }
+
+    RootConfig rootConfig(pRootConfigSegment);
+
+    ApplicationConfig appConfig =
+        rootConfig.getConfig<ApplicationConfig>();
+
+    ClientManagerConfig clientManagerConfig =
+        rootConfig.getConfig<ClientManagerConfig>();
+
+    ClientsConfig clientsConfig =
+        rootConfig.getConfig<ClientsConfig>();
+
+
+    string configVersion = rootConfig.getConfigVersion();
+    cout << configVersion << endl;
+
+    string appName = appConfig.getName();
+    cout << appName << endl;
+
+    string appVersion = appConfig.getVersion();
+    cout << appVersion << endl;
+
+    int clientManagerMaxClient = clientManagerConfig.getMaximumClientNumber();
+    cout << clientManagerMaxClient << endl;
+    
+    cout << "1==>" << endl;
+    vector<ClientConfig> clientConfigs = clientsConfig.getClientConfigs();
+
+    cout << "2==>" << endl;
+    Client::Type c0Type = clientConfigs[0].getType();
+    cout << c0Type << endl;
+
+    cout << "3==>" << endl;
+    Client::Type c1Type = clientConfigs[1].getType();
+    cout << c1Type << endl;
+
+
+    cout << "4==>" << endl;
+    vector<Client::Role> c0Roles = clientConfigs[0].getRoles();
+    cout << c0Roles[0] << endl;
+    cout << c0Roles[1] << endl;
+
+
+
+
+    cout << "5==>" << endl;
+    vector<Client::Role> c1Roles = clientConfigs[1].getRoles();
+    cout << c1Roles[0] << endl;
+    cout << c1Roles[1] << endl;
+    cout << c1Roles[2] << endl;
+
+
 
 
 

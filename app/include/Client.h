@@ -28,6 +28,21 @@ class Client : public ClientControl,
     public Monitor, public Commander, public PositionHandler
 {
     public:
+        enum Type {
+            UndefinedType,  // No type is defined in config
+            UnknownType,    // The defined type is unknown
+            Console,
+            PushButton
+        };
+
+        enum Role {
+            UnknownRole,    // The defined role is unknown
+            Commander,
+            Monitor,
+            PositionHandler
+        };
+
+    public:
         virtual ~Client() = 0;
 
     protected:

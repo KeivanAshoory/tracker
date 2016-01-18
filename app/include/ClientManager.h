@@ -45,6 +45,10 @@ class ClientManager
         std::list<Client*> mpClients;
 
         static Client* createClient(const std::string& clientSpec);
+
+        ClientManager(const ClientManager& other);
+        ClientManager& operator=(const ClientManager& other);
+
 };
 
 #endif

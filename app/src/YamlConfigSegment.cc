@@ -21,12 +21,20 @@
 
 YamlConfigSegment::YamlConfigSegment(YAML::Node yamlNode) : mYamlNode(yamlNode)
 {
+    Logger::debug("YamlConfigSegment::ctor");
     assert(!yamlNode.IsNull());
 }
 
 YamlConfigSegment::~YamlConfigSegment()
 {
+    Logger::debug("YamlConfigSegment::dtor");
 
+}
+
+YamlConfigSegment* YamlConfigSegment::clone() const
+{
+    Logger::debug("YamlConfigSegment::clone");
+    return new YamlConfigSegment(*this);
 }
 
 bool YamlConfigSegment::hasSegment(const std::string& segmentTag) const
@@ -77,16 +85,18 @@ ConfigSegment* YamlConfigSegment::getSegment(
 
 std::vector<ConfigSegment*> YamlConfigSegment::getSegmentArray() const
 {
-    std::vector<ConfigSegment*> configSegments;
     if(hasSegmentArray()) {
+        std::vector<ConfigSegment*> configSegments;
         for(YAML::const_iterator
                 it = mYamlNode.begin(); it != mYamlNode.end(); ++it) {
             configSegments.push_back(
                     new YamlConfigSegment(*it));
         }
+        return configSegments;
+    } else {
+        // Return empty vector if there is no segment array.
+        return std::vector<ConfigSegment*>();
     }
-
-    return configSegments;
 }
 
 void YamlConfigSegment::getProperty(
