@@ -18,16 +18,19 @@
 
 #include <cassert>
 #include <yaml-cpp/yaml.h>
+#include "Logger.h"
 #include "YamlConfigSegment.h"
 #include "YamlConfigLoader.h"
 
 YamlConfigLoader::YamlConfigLoader()
 {
+    Logger::debug("YamlConfigLoader::ctor");
 
 }
 
 YamlConfigLoader::~YamlConfigLoader()
 {
+    Logger::debug("YamlConfigLoader::dtor");
 
 }
 

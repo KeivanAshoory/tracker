@@ -15,14 +15,18 @@
  *
  * =============================================================================
  */
+
+#include "Logger.h"
 #include "ClientControl.h"
 
 ClientControl::ClientControl()
 {
+    Logger::debug("ClientControl::ctor");
 
 }
 
 ClientControl::~ClientControl()
 {
+    Logger::debug("ClientControl::dtor");
 
 }

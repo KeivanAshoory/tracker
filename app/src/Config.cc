@@ -20,6 +20,9 @@
 #include "ClientManagerConfig.h"
 #include "ClientsConfig.h"
 #include "ApplicationConfig.h"
+#include "GeneralCommanderConfig.h"
+#include "GeneralMonitorConfig.h"
+#include "GeneralPositionHandlerConfig.h"
 
 using namespace std;
 
@@ -61,4 +64,22 @@ template <>
 std::string Config::getSegmentTag<ApplicationConfig>()
 {
     return SEGMENT_TAG_APPLICATION;
+}
+
+template <>
+std::string Config::getSegmentTag<GeneralCommanderConfig>()
+{
+    return SEGMENT_TAG_GENERAL_COMMANDER;
+}
+
+template <>
+std::string Config::getSegmentTag<GeneralMonitorConfig>()
+{
+    return SEGMENT_TAG_GENERAL_MONITOR;
+}
+
+template <>
+std::string Config::getSegmentTag<GeneralPositionHandlerConfig>()
+{
+    return SEGMENT_TAG_GENERAL_POSITION_HANDLER;
 }

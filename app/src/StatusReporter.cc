@@ -16,15 +16,18 @@
  * =============================================================================
  */
 
+#include "Logger.h"
 #include "StatusReporter.h"
 
 StatusReporter::StatusReporter()
 {
+    Logger::debug("StatusReporter::ctor");
 
 }
 
 StatusReporter::~StatusReporter()
 {
+    Logger::debug("StatusReporter::dtor");
 
 }
 

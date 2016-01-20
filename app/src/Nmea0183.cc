@@ -26,13 +26,13 @@ using namespace std;
 
 Nmea0183::Nmea0183()
 {
-    Logger::info("Nmea0183:constructor");
+    Logger::debug("Nmea0183:ctor");
     resetReceiver();
 }
 
 Nmea0183::~Nmea0183()
 {
-    Logger::info("Nmea0183:destructor");
+    Logger::debug("Nmea0183:dtor");
     //TODO free memory or something?!
 }
 

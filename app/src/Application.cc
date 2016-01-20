@@ -28,9 +28,15 @@
 #include "RootConfig.h"
 #include "ApplicationConfig.h"
 #include "ClientManagerConfig.h"
+#include "GeneralCommanderConfig.h"
+#include "GeneralMonitorConfig.h"
+#include "GeneralPositionHandlerConfig.h"
 #include "ClientsConfig.h"
 #include "ClientConfig.h"
 #include "Application.h"
+#include "GeneralCommanderConfig.h"
+#include "GeneralMonitorConfig.h"
+#include "GeneralPositionHandlerConfig.h"
 
 using namespace std;
 
@@ -65,7 +71,7 @@ bool Application::isStarted(void)
 
 void Application::onStart(void)
 {
-    Logger::info("Application::onStart");
+    Logger::debug("Application::onStart");
     assert(!mIsStarted); // Only once!
 
     // 1) Read configuration
@@ -83,26 +89,43 @@ void Application::onStart(void)
 
     if(!pRootConfigSegment) {
         // Cannot load the configuration file!
-        // TODO Log something!
+        Logger::fatal("Cannot load the configuration!");
+
         exit(-1);   //TODO do something based on guideline
     }
 
+    // Create a root config object from a root config segment; e.g. a yaml node
     RootConfig rootConfig(pRootConfigSegment);
+    
+    ApplicationConfig applicationConfig =
+        rootConfig.getConfig<ApplicationConfig>();
 
     ClientManagerConfig clientManagerConfig =
         rootConfig.getConfig<ClientManagerConfig>();
 
+    GeneralCommanderConfig generalCommanderConfig =
+        rootConfig.getConfig<GeneralCommanderConfig>();
 
+    GeneralMonitorConfig generalMonitorConfig =
+        rootConfig.getConfig<GeneralMonitorConfig>();
+
+    GeneralPositionHandlerConfig generalPositionHandlerConfig  =
+        rootConfig.getConfig<GeneralPositionHandlerConfig>();
+
+    ClientsConfig clientsConfig = 
+        rootConfig.getConfig<ClientsConfig>();
 
     // 2) Create objects
-    mpGeneralCommander = new GeneralCommander("c");
-    mpGeneralMonitor = new GeneralMonitor("c");
-    mpGeneralPositionHandler = new GeneralPositionHandler("c");
-    mpClientManager = new ClientManager("c");
+    mpGeneralCommander = new GeneralCommander(generalCommanderConfig);
+    mpGeneralMonitor = new GeneralMonitor(generalMonitorConfig);
+    mpGeneralPositionHandler =
+        new GeneralPositionHandler(generalPositionHandlerConfig);
+
+    mpClientManager = new ClientManager(clientManagerConfig);
 
     if(mpGeneralCommander == NULL || mpGeneralMonitor == NULL ||
             mpGeneralPositionHandler == NULL || mpClientManager == NULL) {
-        // TODO Log something
+        Logger::fatal("Cannot create main components!");
         onTerminate();
         return;
     }
@@ -113,7 +136,7 @@ void Application::onStart(void)
     mpClientManager->setGeneralPositionHandler(mpGeneralPositionHandler);
 
     // 4) Ask Manager to create clients
-    mpClientManager->createClients("c");
+    mpClientManager->createClients(clientsConfig);
 
     // 5) Start data acquiring
 
@@ -122,7 +145,7 @@ void Application::onStart(void)
 
 void Application::onTerminate(void)
 {
-    Logger::info("Application::onTerminate");
+    Logger::debug("Application::onTerminate");
     // Warning: Do not check mIsStarted before deleting allocated objects
     delete mpGeneralCommander;
     delete mpGeneralMonitor;

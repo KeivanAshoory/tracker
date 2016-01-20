@@ -21,13 +21,13 @@
 
 PushButtonClient::PushButtonClient()
 {
-    Logger::info("PushButtonClient::ctor");
+    Logger::debug("PushButtonClient::ctor");
 
 }
 
 PushButtonClient::~PushButtonClient()
 {
-    Logger::info("PushButtonClient::dtor");
+    Logger::debug("PushButtonClient::dtor");
 
 }
 

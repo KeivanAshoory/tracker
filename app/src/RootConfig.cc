@@ -17,20 +17,26 @@
  */
 
 #include <stdlib.h>
+#include "Logger.h"
 #include "Config.h"
 #include "ClientManagerConfig.h"
 #include "ApplicationConfig.h"
+#include "GeneralCommanderConfig.h"
+#include "GeneralMonitorConfig.h"
+#include "GeneralPositionHandlerConfig.h"
 #include "ClientsConfig.h"
 #include "RootConfig.h"
 
 RootConfig::RootConfig(ConfigSegment* pConfigSegment) :
     ComponentConfig(pConfigSegment)
 {
+    Logger::debug("RootConfig::ctor");
     //TODO Is it necessary to validate ConfigSegment?! e.g. whether it is map?
 }
 
 RootConfig::~RootConfig()
 {
+    Logger::debug("RootConfig::dtor");
 
 }
 
@@ -47,9 +53,9 @@ T RootConfig::getConfig() const
         mpConfigSegment->getSegment(Config::getSegmentTag<T>());
 
     if(!pConfigSegment) {
-        // Cannot load the configuration segment!
+        // Cannot load the configuration segment! Maybe there is no such segment
         // TODO Log something!
-        exit(-1);   //TODO do something based on guideline
+        Logger::info("Cannot load requested config segment!");
     }
 
     return T(pConfigSegment);
@@ -58,3 +64,6 @@ T RootConfig::getConfig() const
 template ApplicationConfig RootConfig::getConfig() const;
 template ClientManagerConfig RootConfig::getConfig() const;
 template ClientsConfig RootConfig::getConfig() const;
+template GeneralCommanderConfig RootConfig::getConfig() const;
+template GeneralMonitorConfig RootConfig::getConfig() const;
+template GeneralPositionHandlerConfig RootConfig::getConfig() const;

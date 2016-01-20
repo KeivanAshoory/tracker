@@ -17,16 +17,19 @@
  */
 
 #include <cassert>
+#include "Logger.h"
 #include "XmlConfigSegment.h"
 #include "XmlConfigLoader.h"
 
 XmlConfigLoader::XmlConfigLoader()
 {
+    Logger::debug("XmlConfigLoader::ctor");
 
 }
 
 XmlConfigLoader::~XmlConfigLoader()
 {
+    Logger::debug("XmlConfigLoader::dtor");
 
 }
 

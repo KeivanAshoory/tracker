@@ -16,17 +16,20 @@
  * =============================================================================
  */
 
+#include "Logger.h"
 #include "ClientManagerConfig.h"
 #include "Config.h"
 
 ClientManagerConfig::ClientManagerConfig(ConfigSegment* pConfigSegment) : 
     ComponentConfig(pConfigSegment)
 {
+    Logger::debug("ClientManagerConfig::ctor");
 
 }
 
 ClientManagerConfig::~ClientManagerConfig()
 {
+    Logger::debug("ClientManagerConfig::dtor");
 
 }
 

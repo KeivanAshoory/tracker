@@ -23,19 +23,21 @@
 #include "Client.h"
 #include "GeneralCommander.h"
 #include "GeneralMonitor.h"
+#include "ClientsConfig.h"
+#include "ClientManagerConfig.h"
 #include "GeneralPositionHandler.h"
 
 class ClientManager
 {
     public:
-        ClientManager(const std::string& config);
+        ClientManager(const ClientManagerConfig& config);
         ~ClientManager();
 
         void setGeneralCommander(GeneralCommander* pGeneral);
         void setGeneralMonitor(GeneralMonitor* pGeneral);
         void setGeneralPositionHandler(GeneralPositionHandler* pGeneral);
 
-        void createClients(const std::string& clientsSpec);
+        void createClients(const ClientsConfig& clientsConfig);
 
     private:
         GeneralCommander* mpGeneralCommander;
@@ -44,10 +46,10 @@ class ClientManager
 
         std::list<Client*> mpClients;
 
-        static Client* createClient(const std::string& clientSpec);
+        static Client* createClient(const ClientConfig& clientConfig);
 
-        ClientManager(const ClientManager& other);
-        ClientManager& operator=(const ClientManager& other);
+        ClientManager(const ClientManager& rhs);
+        ClientManager& operator=(const ClientManager& rhs);
 
 };
 

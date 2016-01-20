@@ -21,15 +21,16 @@
 
 using namespace std;
 
-GeneralPositionHandler::GeneralPositionHandler(const string& config)
+GeneralPositionHandler::GeneralPositionHandler(
+        const GeneralPositionHandlerConfig& config)
 {
-    Logger::info("GeneralPositionHandler::ctor");
+    Logger::debug("GeneralPositionHandler::ctor");
 
 }
 
 GeneralPositionHandler::~GeneralPositionHandler()
 {
-    Logger::info("GeneralPositionHandler::dtor");
+    Logger::debug("GeneralPositionHandler::dtor");
 
 }
 

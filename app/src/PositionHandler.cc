@@ -16,15 +16,18 @@
  * =============================================================================
  */
 
+#include "Logger.h"
 #include "PositionHandler.h"
 
 PositionHandler::PositionHandler()
 {
+    Logger::debug("PositionHandler:ctor");
 
 }
 
 PositionHandler::~PositionHandler()
 {
+    Logger::debug("PositionHandler:dtor");
 
 }
 

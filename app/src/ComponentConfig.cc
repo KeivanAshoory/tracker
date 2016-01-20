@@ -52,3 +52,7 @@ ComponentConfig& ComponentConfig::operator=(const ComponentConfig& rhs)
     }
     return *this;
 }
+bool ComponentConfig::isConfigured() const
+{
+    return mpConfigSegment == NULL ? false : true;
+}

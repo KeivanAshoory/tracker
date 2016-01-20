@@ -21,13 +21,13 @@
 
 ConsoleClient::ConsoleClient()
 {
-    Logger::info("ConsoleClient::ctor");
+    Logger::debug("ConsoleClient::ctor");
 
 }
 
 ConsoleClient::~ConsoleClient()
 {
-    Logger::info("ConsoleClient::dtor");
+    Logger::debug("ConsoleClient::dtor");
 
 }
 

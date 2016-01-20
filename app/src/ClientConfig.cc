@@ -24,11 +24,13 @@
 ClientConfig::ClientConfig(ConfigSegment* pConfigSegment) : 
     ComponentConfig(pConfigSegment)
 {
+    Logger::debug("ClientConfig::ctor");
 
 }
 
 ClientConfig::~ClientConfig()
 {
+    Logger::debug("ClientConfig::dtor");
 
 }
 

@@ -28,6 +28,8 @@ class ComponentConfig
     public:
         virtual ~ComponentConfig() = 0;
 
+        bool isConfigured() const;
+
     protected:
         //TODO copy ctor is most likely needed!
         ComponentConfig(ConfigSegment* pConfigSegment);
@@ -36,7 +38,6 @@ class ComponentConfig
 
         ConfigSegment* mpConfigSegment;
 
-    private:
 };
 
 #endif /* end of include guard: COMPONENTCONFIG_H */

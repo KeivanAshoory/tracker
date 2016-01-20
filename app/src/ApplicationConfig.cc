@@ -16,17 +16,20 @@
  * =============================================================================
  */
 
+#include "Logger.h"
 #include "ApplicationConfig.h"
 #include "Config.h"
 
 ApplicationConfig::ApplicationConfig(ConfigSegment* pConfigSegment) : 
     ComponentConfig(pConfigSegment)
 {
+    Logger::debug("ApplicationConfig::ctor");
 
 }
 
 ApplicationConfig::~ApplicationConfig()
 {
+    Logger::debug("ApplicationConfig::dtor");
 
 }
 

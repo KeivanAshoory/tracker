@@ -21,15 +21,15 @@
 
 using namespace std;
 
-GeneralMonitor::GeneralMonitor(const string& config)
+GeneralMonitor::GeneralMonitor(const GeneralMonitorConfig& config)
 {
-    Logger::info("GeneralMonitor::ctor");
+    Logger::debug("GeneralMonitor::ctor");
 
 }
 
 GeneralMonitor::~GeneralMonitor()
 {
-    Logger::info("GeneralMonitor::dtor");
+    Logger::debug("GeneralMonitor::dtor");
 
 }
 

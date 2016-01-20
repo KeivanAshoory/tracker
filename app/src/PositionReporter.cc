@@ -16,15 +16,18 @@
  * =============================================================================
  */
 
+#include "Logger.h"
 #include "PositionReporter.h"
 
 PositionReporter::PositionReporter()
 {
+    Logger::debug("PositionReporter:ctor");
 
 }
 
 PositionReporter::~PositionReporter()
 {
+    Logger::debug("PositionReporter:dtor");
 
 }
 

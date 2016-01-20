@@ -21,11 +21,13 @@
 
 Monitor::Monitor()
 {
+    Logger::debug("Monitor::ctor");
 
 }
 
 Monitor::~Monitor()
 {
+    Logger::debug("Monitor::dtor");
 
 }
 

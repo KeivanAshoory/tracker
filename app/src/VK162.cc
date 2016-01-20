@@ -32,7 +32,7 @@ bool VK162::sIsDataAvailable = false;   //TODO sig_atomic_t??
 
 VK162::VK162()
 {
-    Logger::info("VK162::constructor");
+    Logger::debug("VK162::ctor");
     mIsSerialOpen = false;
     VK162::sIsDataAvailable = false;
     mSerialDeviceName = "";
@@ -40,7 +40,7 @@ VK162::VK162()
 
 VK162::~VK162()
 {
-    Logger::info("VK162::destructor");
+    Logger::debug("VK162::dtor");
     if(mIsSerialOpen) {
         if(!closeSerial()) {
             //unable to close the port

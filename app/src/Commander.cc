@@ -16,15 +16,18 @@
  * =============================================================================
  */
 
+#include "Logger.h"
 #include "Commander.h"
 
 Commander::Commander()
 {
+    Logger::debug("Commander::ctor");
 
 }
 
 Commander::~Commander()
 {
+    Logger::debug("Commander::dtor");
 
 }
 

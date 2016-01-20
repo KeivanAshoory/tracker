@@ -21,15 +21,15 @@
 
 using namespace std;
 
-GeneralCommander::GeneralCommander(const string& config)
+GeneralCommander::GeneralCommander(const GeneralCommanderConfig& config)
 {
-    Logger::info("GeneralCommander::ctor");
+    Logger::debug("GeneralCommander::ctor");
 
 }
 
 GeneralCommander::~GeneralCommander()
 {
-    Logger::info("GeneralCommander::dtor");
+    Logger::debug("GeneralCommander::dtor");
 
 }
 

@@ -16,15 +16,18 @@
  * =============================================================================
  */
 
+#include "Logger.h"
 #include "ConfigSegment.h"
 
 ConfigSegment::ConfigSegment()
 {
+    Logger::debug("ConfigSegment::ctor");
 
 }
 
 ConfigSegment::~ConfigSegment()
 {
+    Logger::debug("ConfigSegment::dtor");
 
 }
 

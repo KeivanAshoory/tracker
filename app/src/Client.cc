@@ -21,11 +21,13 @@
 
 Client::Client()
 {
+    Logger::debug("Client::ctor");
 
 }
 
 Client::~Client()
 {
+    Logger::debug("Client::dtor");
 
 }
 

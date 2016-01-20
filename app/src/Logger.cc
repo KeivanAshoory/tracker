@@ -25,7 +25,7 @@
 #include <syslog.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include <Logger.h>
+#include "Logger.h"
 
 using namespace std;
 
@@ -38,6 +38,7 @@ Logger Logger::sInstance;
 
 Logger::Logger()
 {
+    Logger::debug("Logger::ctor");
     mInitialised = false;
     mLogDestinationInitialised = false;
     mLogIdentifier = "";
@@ -49,6 +50,7 @@ Logger::Logger()
 
 Logger::~Logger()
 {
+    Logger::debug("Logger::dtor");
     if(mInitialised) {
         if(closeLog()) {
             Logger::info("Logger closed.");

@@ -23,12 +23,13 @@
 #include <string>
 #include "CommandNotifier.h"
 #include "CommandListener.h"
+#include "GeneralCommanderConfig.h"
 #include "CommandRequestListener.h"
 
 class GeneralCommander : public CommandNotifier, public CommandRequestListener
 {
     public:
-        GeneralCommander(const std::string& config);
+        GeneralCommander(const GeneralCommanderConfig& config);
         ~GeneralCommander();
 
         // Impelement CommandNotifier

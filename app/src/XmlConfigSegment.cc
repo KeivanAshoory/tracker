@@ -17,15 +17,18 @@
  */
 
 #include <cassert>
+#include "Logger.h"
 #include "XmlConfigSegment.h"
 
 XmlConfigSegment::XmlConfigSegment()
 {
+    Logger::debug("XmlConfigSegment::ctor");
     assert(0);  // Not Imlemented!
 }
 
 XmlConfigSegment::~XmlConfigSegment()
 {
+    Logger::debug("XmlConfigSegment::dtor");
 
 }
 

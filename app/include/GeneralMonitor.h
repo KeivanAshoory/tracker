@@ -23,12 +23,13 @@
 #include <string>
 #include "StatusNotifier.h"
 #include "StatusListener.h"
+#include "GeneralMonitorConfig.h"
 #include "StatusReportListener.h"
 
 class GeneralMonitor : public StatusNotifier, public StatusReportListener
 {
     public:
-        GeneralMonitor(const std::string& config);
+        GeneralMonitor(const GeneralMonitorConfig& config);
         ~GeneralMonitor();
 
         // Impelement StatusNotifier

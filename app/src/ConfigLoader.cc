@@ -17,15 +17,18 @@
  */
 
 #include <cassert>
+#include "Logger.h"
 #include "ConfigLoader.h"
 
 ConfigLoader::ConfigLoader()
 {
+    Logger::debug("ConfigLoader::ctor");
 
 }
 
 ConfigLoader::~ConfigLoader()
 {
+    Logger::debug("ConfigLoader::dtor");
 
 }
 
