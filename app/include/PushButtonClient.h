@@ -19,12 +19,13 @@
 #ifndef PUSH_BUTTON_CLIENT_H
 #define PUSH_BUTTON_CLIENT_H
 
+#include "ClientConfig.h"
 #include "Client.h"
 
 class PushButtonClient : public Client
 {
     public:
-        PushButtonClient();
+        PushButtonClient(const ClientConfig& config);
         ~PushButtonClient();
 };
 

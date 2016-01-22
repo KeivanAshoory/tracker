@@ -16,6 +16,7 @@
  * =============================================================================
  */
 
+#include <cassert>
 #include "Logger.h"
 #include "ClientManager.h"
 #include "ClientFactory.h"
@@ -36,44 +37,66 @@ ClientManager::~ClientManager()
     // TODO Check the logic: all of them are valid to delete?!
     for(std::list<Client*>::const_iterator
             it = mpClients.begin(); it != mpClients.end(); ++it) {
+        Logger::info("ClientManager::dtor: Deleting a client.");
+
         delete (*it);
     }
 }
 
 void ClientManager::createClients(const ClientsConfig& clientsConfig)
 {
-//    Client* client;
-//
-//    client = createClient("Console");
-//    if(client == NULL) {
-//        //TODO
-//    }
-//    mpClients.push_back(client);
-//    client->registerCommandRequestListener(mpGeneralCommander);
-//    mpGeneralMonitor->registerStatusListener(client);
-//    mpGeneralPositionHandler->registerPositionListener(client);
-//
-//    client = createClient("PushButton");
-//    if(client == NULL) {
-//        //TODO
-//    }
-//    mpClients.push_back(client);
-//    client->registerCommandRequestListener(mpGeneralCommander);
-}
+    std::vector<ClientConfig> clientConfigs = clientsConfig.getClientConfigs();
 
-Client* ClientManager::createClient(const ClientConfig& clientConfig)
-{
-//    if(clientSpec == "Console") {
-//        Client* pClient = ClientFactory::create(Client::Console);
-//        return pClient;
-//
-//    } else if(clientSpec == "PushButton") {
-//        Client* pClient = ClientFactory::create(Client::PushButton);
-//        return pClient;
-//    }
+    for(std::vector<ClientConfig>::iterator
+            clientConfigIter = clientConfigs.begin();
+            clientConfigIter != clientConfigs.end();
+            ++clientConfigIter) {
+        // Create a client.
+        Logger::info("ClientManager::createClients: Creating a client.");
 
-    Client* pClient = ClientFactory::create(Client::Console);
-    return pClient;
+        Client* pClient = ClientFactory::create(*clientConfigIter);
+        if(pClient == NULL) {
+            Logger::error("Failed to create client!");
+            continue;
+        }
+
+        mpClients.push_back(pClient);
+
+        // Make connections
+        std::vector<Client::Role> clientRoles = clientConfigIter->getRoles();
+        if(!clientRoles.empty()) {
+            for(std::vector<Client::Role>::iterator
+                    roleIter = clientRoles.begin();
+                    roleIter != clientRoles.end();
+                    ++roleIter) {
+                switch(*roleIter) {
+                    case Client::Commander:
+                        pClient->registerCommandRequestListener(
+                                mpGeneralCommander);
+                        break;
+                    case Client::Monitor:
+                        mpGeneralMonitor->registerStatusListener(pClient);
+                        break;
+                    case Client::PositionHandler:
+                        mpGeneralPositionHandler->registerPositionListener(
+                                pClient);
+                        break;
+                    case Client::UnknownRole:
+                        Logger::error("An unknown role is defined for client!");
+                        break;
+                    default:
+                        Logger::error("ClientManager::createClients: \
+                                An undefined role is detected! \
+                                We must not be here!");
+                        assert(true);
+                        break;
+                }
+            }
+
+        } else {
+            Logger::error("No role is defined for client!");
+        }
+    }
 }
 
 void ClientManager::setGeneralCommander(GeneralCommander* pGeneral)

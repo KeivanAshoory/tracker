@@ -25,7 +25,7 @@
 class ClientFactory
 {
     public:
-        static Client* create(Client::Type clientiType);
+        static Client* create(const ClientConfig& clientConfig);
 };
 
 #endif

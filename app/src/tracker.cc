@@ -47,34 +47,22 @@ int main()
 
     Logger::info("tracker started.");
 
-    Application* ppppApp = Application::getInstance();
-    ppppApp->configTest2();
+    Application* pApp = Application::getInstance();
+    pApp->onStart();
 
-
-
-
-
-
-
-
-
+    Logger::info("tracker stopped.");
+    delete pApp;    //TODO Is that okay?! should we delete it in this way?
     return 0;
-
-
-
-
 
     VK162 gps;
     gps.setSerialDevice("/dev/ttySAC1");
     if(!gps.openSerial(VK162::Asynchronous)) {
         Logger::fatal("Failed to open serial port!");
+        //TODO Make sure you do all the clean-up!!
         return -1;
     }
 
     Logger::info("Serial port opened successfully.");
-
-    Application* pApp = Application::getInstance();
-    pApp->onStart();
 
     while(isQuitRequested != SIGINT) {
         usleep(100000);

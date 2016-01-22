@@ -20,9 +20,12 @@
 #define CLIENT_H
 
 #include "ClientControl.h"
+//#include "ClientConfig.h"
 #include "Monitor.h"
 #include "Commander.h"
 #include "PositionHandler.h"
+
+class ClientConfig; // Cannot include Client.h and ClientConfig.h recursively.
 
 class Client : public ClientControl,
     public Monitor, public Commander, public PositionHandler
@@ -42,11 +45,10 @@ class Client : public ClientControl,
             PositionHandler
         };
 
-    public:
         virtual ~Client() = 0;
 
     protected:
-        Client();
+        Client(const ClientConfig& config);
 
         // Implement Monitor
         virtual void onNotifyMonitorEvent(int eventId) const;

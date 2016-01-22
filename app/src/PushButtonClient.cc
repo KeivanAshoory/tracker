@@ -19,7 +19,8 @@
 #include "Logger.h"
 #include "PushButtonClient.h"
 
-PushButtonClient::PushButtonClient()
+PushButtonClient::PushButtonClient(const ClientConfig& config) : Client(config)
+
 {
     Logger::debug("PushButtonClient::ctor");
 

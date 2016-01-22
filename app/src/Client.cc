@@ -19,7 +19,7 @@
 #include "Logger.h"
 #include "Client.h"
 
-Client::Client()
+Client::Client(const ClientConfig& config)
 {
     Logger::debug("Client::ctor");
 

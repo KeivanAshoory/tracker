@@ -16,22 +16,32 @@
  * =============================================================================
  */
 
+#include <cassert>
+#include "Logger.h"
+#include "ClientConfig.h"
 #include "ConsoleClient.h"
 #include "PushButtonClient.h"
 #include "Client.h"
 #include "ClientFactory.h"
 
-using namespace std;
-
-Client* ClientFactory::create(Client::Type clientType)
+Client* ClientFactory::create(const ClientConfig& clientConfig)
 {
-    switch(clientType) {
+    switch(clientConfig.getType()) {
         case Client::Console:
-            return new ConsoleClient;
+            return new ConsoleClient(clientConfig);
         case Client::PushButton:
-            return new PushButtonClient;
+            return new PushButtonClient(clientConfig);
             break;
+        case Client::UnknownType:
+            Logger::error("An unknown type is defined for client!");
+            return NULL;
+        case Client::UndefinedType:
+            Logger::error("No type is defined for client!");
+            return NULL;
         default:
+            Logger::error("ClientFactory::create: \
+                    An undefined type is detected! We must not be here!");
+            assert(true);
             return NULL;
 
     }

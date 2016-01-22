@@ -19,12 +19,13 @@
 #ifndef CONSOLE_CLIENT_H
 #define CONSOLE_CLIENT_H
 
+#include "ClientConfig.h"
 #include "Client.h"
 
 class ConsoleClient : public Client
 {
     public:
-        ConsoleClient();
+        ConsoleClient(const ClientConfig& config);
         ~ConsoleClient();
 
     protected:

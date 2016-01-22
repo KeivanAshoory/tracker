@@ -19,7 +19,7 @@
 #include "Logger.h"
 #include "ConsoleClient.h"
 
-ConsoleClient::ConsoleClient()
+ConsoleClient::ConsoleClient(const ClientConfig& config) : Client(config)
 {
     Logger::debug("ConsoleClient::ctor");
 
