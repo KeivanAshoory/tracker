@@ -82,7 +82,8 @@ void Application::onStart(void)
 
     // 1) Read configuration
     ConfigLoader* pConfigLoader = 
-        ConfigLoaderFactory::create(ConfigLoaderFactory::YamlLoader);
+        ConfigLoaderFactory::create(ConfigLoaderFactory::YamlFileLoader,
+                "./tracker.yaml");
 
     ConfigSegment* pRootConfigSegment = pConfigLoader->getConfig();
     delete pConfigLoader;
@@ -161,7 +162,8 @@ void Application::configTest(void)
     ConfigSegment* puut;
 
     ConfigLoader* pConfigLoader = 
-        ConfigLoaderFactory::create(ConfigLoaderFactory::YamlLoader);
+        ConfigLoaderFactory::create(ConfigLoaderFactory::YamlFileLoader,
+                "./tracker.yaml");
 
     ConfigSegment* pRootConfigSegment = pConfigLoader->getConfig();
     delete pConfigLoader;
@@ -281,7 +283,8 @@ void Application::configTest(void)
 void Application::configTest2(void)
 {
     ConfigLoader* pConfigLoader = 
-        ConfigLoaderFactory::create(ConfigLoaderFactory::YamlLoader);
+        ConfigLoaderFactory::create(ConfigLoaderFactory::YamlFileLoader,
+                "./tracker.yaml");
 
     ConfigSegment* pRootConfigSegment = pConfigLoader->getConfig();
     delete pConfigLoader;

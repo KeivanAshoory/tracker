@@ -17,17 +17,24 @@
  */
 
 #include <stddef.h>
-#include "YamlConfigLoader.h"
+#include "YamlFileConfigLoader.h"
 #include "XmlConfigLoader.h"
 #include "ConfigLoaderFactory.h"
 
 using namespace std;
 
-ConfigLoader* ConfigLoaderFactory::create(ConfigLoderType loaderType)
+ConfigLoader* ConfigLoaderFactory::create(ConfigLoderType loaderType,
+        const std::string& configFile)
 {
+    //TODO argument configFile does not look like a good idea! Separate methods
+    //looks better.
+    if(configFile.empty()) {
+        return NULL;
+    }
+
     switch(loaderType) {
-        case YamlLoader:
-            return new YamlConfigLoader();
+        case YamlFileLoader:
+            return new YamlFileConfigLoader(configFile);
         case XmlLoader:
             return new XmlConfigLoader();
         default:

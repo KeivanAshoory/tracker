@@ -26,11 +26,12 @@ class ConfigLoaderFactory
 {
     public:
         enum ConfigLoderType {
-            YamlLoader,
+            YamlFileLoader,
             XmlLoader
         };
 
-        static ConfigLoader* create(ConfigLoderType loaderType);
+        static ConfigLoader* create(ConfigLoderType loaderType,
+                const std::string& configFile);
         // We can define different factory methods like:
         // createYamlByFile
         // createYamlByStream

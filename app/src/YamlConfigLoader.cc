@@ -3,7 +3,7 @@
  *
  *       Filename:  YamlConfigLoader.cc
  *
- *    Description:  Yaml configuration loader concrete class
+ *    Description:  Yaml configuration loader abstract class
  *
  *        Version:  1.0
  *        Created:  28/12/15 12:08:38
@@ -16,8 +16,6 @@
  * =============================================================================
  */
 
-#include <cassert>
-#include <yaml-cpp/yaml.h>
 #include "Logger.h"
 #include "YamlConfigSegment.h"
 #include "YamlConfigLoader.h"
@@ -36,13 +34,12 @@ YamlConfigLoader::~YamlConfigLoader()
 
 ConfigSegment* YamlConfigLoader::loadConfig(void) const
 {
-    //TODO remember to handle exception
-    YAML::Node rootYamlNode = YAML::LoadFile("./tracker.yaml");
+    YAML::Node rootNode = loadRootNode();
 
-    if(rootYamlNode.IsNull()) {
+    if(rootNode.IsNull()) {
         // TODO Log it!
         return NULL;
     }
 
-    return new YamlConfigSegment(rootYamlNode);
+    return new YamlConfigSegment(rootNode);
 }
