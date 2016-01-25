@@ -29,6 +29,7 @@ class Config
         static const std::string SEGMENT_TAG_GENERAL_COMMANDER;
         static const std::string SEGMENT_TAG_GENERAL_MONITOR;
         static const std::string SEGMENT_TAG_GENERAL_POSITION_HANDLER;
+        static const std::string SEGMENT_TAG_POSITION_ACQUIRER;
         static const std::string SEGMENT_TAG_CLIENTS;
 
 
@@ -36,6 +37,7 @@ class Config
         static const std::string PROPERTY_TAG_APPLICATION_VERSION;
         static const std::string PROPERTY_TAG_APPLICATION_NAME;
         static const std::string PROPERTY_TAG_CLIENT_MANAGER_MAX_CLIENT_NUMBER;
+        static const std::string PROPERTY_TAG_POSITION_ACQUIRER_DEVICE;
         static const std::string PROPERTY_TAG_CLIENT_TYPE;
         static const std::string PROPERTY_TAG_CLIENT_ROLE;
 

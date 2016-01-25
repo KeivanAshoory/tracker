@@ -37,6 +37,7 @@
 #include "GeneralCommanderConfig.h"
 #include "GeneralMonitorConfig.h"
 #include "GeneralPositionHandlerConfig.h"
+#include "PositionAcquirerConfig.h"
 
 using namespace std;
 
@@ -45,6 +46,7 @@ Application* Application::mInstance = 0;
 Application::Application() :
     mpGeneralCommander(NULL), mpGeneralMonitor(NULL),
     mpGeneralPositionHandler(NULL), mpClientManager(NULL),
+    mpPositionAcquirer(NULL), 
     mIsStarted(false)
 {
     Logger::debug("Application::ctor");
@@ -53,7 +55,10 @@ Application::Application() :
 Application::~Application()
 {
     Logger::debug("Application::dtor");
-    onTerminate();
+
+    if(mIsStarted) {
+        onTerminate();
+    }
 }
 
 Application* Application::getInstance()
@@ -75,10 +80,10 @@ void Application::onStart(void)
     assert(!mIsStarted); // Only once!
 
     // 1) Read configuration
-    // 2) Create objects
+    // 2) Create components
     // 3) Connect Generals to Manager
-    // 4) Ask Manager to create clients
-    // 5) Start data acquiring
+    // 4) Create clients
+    // 5) Create position acquirer
 
     // 1) Read configuration
     ConfigLoader* pConfigLoader = 
@@ -113,10 +118,13 @@ void Application::onStart(void)
     GeneralPositionHandlerConfig generalPositionHandlerConfig  =
         rootConfig.getConfig<GeneralPositionHandlerConfig>();
 
-    ClientsConfig clientsConfig = 
+    ClientsConfig clientsConfig =
         rootConfig.getConfig<ClientsConfig>();
 
-    // 2) Create objects
+    PositionAcquirerConfig positionAcquirerConfig =
+        rootConfig.getConfig<PositionAcquirerConfig>();
+
+    // 2) Create components
     mpGeneralCommander = new GeneralCommander(generalCommanderConfig);
     mpGeneralMonitor = new GeneralMonitor(generalMonitorConfig);
     mpGeneralPositionHandler =
@@ -124,8 +132,11 @@ void Application::onStart(void)
 
     mpClientManager = new ClientManager(clientManagerConfig);
 
+    mpPositionAcquirer = new PositionAcquirer(positionAcquirerConfig);
+
     if(mpGeneralCommander == NULL || mpGeneralMonitor == NULL ||
-            mpGeneralPositionHandler == NULL || mpClientManager == NULL) {
+            mpGeneralPositionHandler == NULL || mpClientManager == NULL ||
+            mpPositionAcquirer == NULL) {
         Logger::fatal("Cannot create main components!");
         onTerminate();
         return;
@@ -136,10 +147,13 @@ void Application::onStart(void)
     mpClientManager->setGeneralMonitor(mpGeneralMonitor);
     mpClientManager->setGeneralPositionHandler(mpGeneralPositionHandler);
 
-    // 4) Ask Manager to create clients
+    // 4) Create clients
     mpClientManager->createClients(clientsConfig);
 
-    // 5) Start data acquiring
+    // 5) Create position acquirer
+    mpPositionAcquirer->start();
+
+
 
     mIsStarted = true;
 }
@@ -152,6 +166,7 @@ void Application::onTerminate(void)
     delete mpGeneralMonitor;
     delete mpGeneralPositionHandler;
     delete mpClientManager;
+    delete mpPositionAcquirer;
 
     //TODO: Do more work here!
     mIsStarted = false;
@@ -349,4 +364,9 @@ void Application::configTest2(void)
 
 
 
+}
+
+void Application::tempOnTick()
+{
+    mpPositionAcquirer->tempOnTick();
 }

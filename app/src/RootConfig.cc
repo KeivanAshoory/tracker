@@ -24,6 +24,7 @@
 #include "GeneralCommanderConfig.h"
 #include "GeneralMonitorConfig.h"
 #include "GeneralPositionHandlerConfig.h"
+#include "PositionAcquirerConfig.h"
 #include "ClientsConfig.h"
 #include "RootConfig.h"
 
@@ -67,3 +68,4 @@ template ClientsConfig RootConfig::getConfig() const;
 template GeneralCommanderConfig RootConfig::getConfig() const;
 template GeneralMonitorConfig RootConfig::getConfig() const;
 template GeneralPositionHandlerConfig RootConfig::getConfig() const;
+template PositionAcquirerConfig RootConfig::getConfig() const;

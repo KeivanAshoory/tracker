@@ -23,6 +23,7 @@
 #include "GeneralMonitor.h"
 #include "GeneralPositionHandler.h"
 #include "ClientManager.h"
+#include "PositionAcquirer.h"
 
 class Application
 {
@@ -36,6 +37,7 @@ class Application
 
         bool isStarted(void);
 
+        void tempOnTick();
         void configTest(void);
         void configTest2(void);
     protected:
@@ -52,6 +54,7 @@ class Application
         GeneralMonitor* mpGeneralMonitor;
         GeneralPositionHandler* mpGeneralPositionHandler;
         ClientManager* mpClientManager;
+        PositionAcquirer* mpPositionAcquirer;
 
         bool mIsStarted;
 };

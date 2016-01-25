@@ -23,6 +23,7 @@
 
 class Nmea0183
 {
+    //TODO This class is not designed in proper way and must be redesigned!
     public:
         Nmea0183();
         ~Nmea0183();

@@ -24,23 +24,23 @@
 
 class VK162 : Nmea0183
 {
+    //TODO This class is not designed in proper way and must be redesigned!
      public:
         enum SyncMode {
             Synchronous,
             Asynchronous
         };
 
-        VK162();
+        VK162(std::string deviceName);
         ~VK162();
 
-        void setSerialDevice(std::string deviceName);
         std::string getSerialDevice();
 
         bool openSerial(SyncMode syncMode);
         bool closeSerial();
-        bool isSerialOpen();
+        bool isSerialOpen() const;
 
-        bool isDataAvailable();
+        bool isDataAvailable() const;
         bool readSerial();
 
     private:

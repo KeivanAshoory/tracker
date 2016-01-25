@@ -23,6 +23,7 @@
 #include "GeneralCommanderConfig.h"
 #include "GeneralMonitorConfig.h"
 #include "GeneralPositionHandlerConfig.h"
+#include "PositionAcquirerConfig.h"
 
 using namespace std;
 
@@ -31,6 +32,7 @@ const string Config::SEGMENT_TAG_CLIENT_MANAGER = "ClientManager";
 const string Config::SEGMENT_TAG_GENERAL_COMMANDER = "GeneralCommander";
 const string Config::SEGMENT_TAG_GENERAL_MONITOR = "GeneralMonitor";
 const string Config::SEGMENT_TAG_GENERAL_POSITION_HANDLER = "GeneralPositionHandler";
+const string Config::SEGMENT_TAG_POSITION_ACQUIRER = "PositionAcquirer";
 const string Config::SEGMENT_TAG_CLIENTS = "Clients";
 
 
@@ -38,6 +40,7 @@ const string Config::PROPERTY_TAG_CONFIG_VERSION = "configVersion";
 const string Config::PROPERTY_TAG_APPLICATION_VERSION = "version";
 const string Config::PROPERTY_TAG_APPLICATION_NAME = "name";
 const string Config::PROPERTY_TAG_CLIENT_MANAGER_MAX_CLIENT_NUMBER = "maximumClientNumber";
+const string Config::PROPERTY_TAG_POSITION_ACQUIRER_DEVICE = "device";
 const string Config::PROPERTY_TAG_CLIENT_TYPE = "type";
 const string Config::PROPERTY_TAG_CLIENT_ROLE = "role";
 
@@ -82,4 +85,10 @@ template <>
 std::string Config::getSegmentTag<GeneralPositionHandlerConfig>()
 {
     return SEGMENT_TAG_GENERAL_POSITION_HANDLER;
+}
+
+template <>
+std::string Config::getSegmentTag<PositionAcquirerConfig>()
+{
+    return SEGMENT_TAG_POSITION_ACQUIRER;
 }

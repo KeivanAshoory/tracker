@@ -30,12 +30,12 @@ using namespace std;
 
 bool VK162::sIsDataAvailable = false;   //TODO sig_atomic_t??
 
-VK162::VK162()
+//TODO This class is not designed in proper way and must be redesigned!
+VK162::VK162(std::string deviceName) :
+    mIsSerialOpen(false), mSerialDeviceName(deviceName)
 {
     Logger::debug("VK162::ctor");
-    mIsSerialOpen = false;
     VK162::sIsDataAvailable = false;
-    mSerialDeviceName = "";
 }
 
 VK162::~VK162()
@@ -184,16 +184,11 @@ bool VK162::readSerial()
         onDataReceive(readBuffer, readCount);
     }
 
-    //no data available anymore
+    //no data available anymore const
     VK162::sIsDataAvailable = false;
     //TODO you may need to make return value more useful,
     //It can be number of total read bytes
     return true;
-}
-
-void VK162::setSerialDevice(std::string device)
-{
-    mSerialDeviceName = device;
 }
 
 std::string VK162::getSerialDevice()
@@ -201,12 +196,12 @@ std::string VK162::getSerialDevice()
     return mSerialDeviceName;
 }
 
-bool VK162::isSerialOpen()
+bool VK162::isSerialOpen() const
 {
     return mIsSerialOpen;
 }
 
-bool VK162::isDataAvailable()
+bool VK162::isDataAvailable() const
 {
     //TODO convert to inline function?
     //TODO the variable is static, and the method is not!!
