@@ -51,6 +51,11 @@ void PositionAcquirer::stop()
     mGps.closeSerial();
 }
 
+void PositionAcquirer::pause()
+{
+
+}
+
 void PositionAcquirer::tempOnTick()
 {
     if(mGps.isDataAvailable()) {

@@ -20,7 +20,7 @@
 #define VK162_H
 
 #include <termios.h>
-#include <Nmea0183.h>
+#include "Nmea0183.h"
 
 class VK162 : Nmea0183
 {

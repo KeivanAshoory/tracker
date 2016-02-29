@@ -24,7 +24,8 @@
 #include "PositionReporter.h"
 #include "PositionAcquirerConfig.h"
 
-class PositionAcquirer : public PositionReporter 
+class PositionAcquirer :
+    public PositionReporter, public StatusReporter, public CommandListener
 {
     public:
         PositionAcquirer(const PositionAcquirerConfig& config);
@@ -32,6 +33,7 @@ class PositionAcquirer : public PositionReporter
 
         bool start();
         void stop();
+        void pause();
 
         void tempOnTick();
 

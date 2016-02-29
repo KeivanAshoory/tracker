@@ -16,14 +16,9 @@
  * =============================================================================
  */
 
-#include <iostream>
 #include <signal.h>
-#include <unistd.h>
 #include "Logger.h"
-#include "VK162.h"
 #include "Application.h"
-
-using namespace std;
 
 volatile static sig_atomic_t isQuitRequested = 0;
 
