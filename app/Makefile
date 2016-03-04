@@ -1,4 +1,4 @@
-CROSS = arm-linux-
+CROSS = #arm-linux-
 CC = g++
 
 SRCEXT = cc
@@ -13,10 +13,12 @@ ifndef CROSS
 	ROOT = /.
 	TARGET = ./bin/tracker
 	PREFIX = $(ROOT)/usr/local
+	CFLAGS = -g -Wall -std=gnu++11
 else
 	ROOT = /opt/FriendlyARM/mini2440/rootfs_qtopia_qt4
 	TARGET = $(ROOT)/opt/share/tracker/bin/tracker
 	PREFIX = $(ROOT)/usr
+	CFLAGS = -g -Wall
 endif
 
 SOURCES = $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
@@ -24,7 +26,6 @@ OBJECTS = $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 LIB = -L $(PREFIX)/lib -lyaml-cpp
 INC = -I$(HDRDIR) -I $(PREFIX)/include
 
-CFLAGS = -g -Wall
 DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.Td
 
 

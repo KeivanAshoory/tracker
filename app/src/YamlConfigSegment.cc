@@ -16,6 +16,7 @@
  * =============================================================================
  */
 
+#include <cassert>
 #include "Logger.h"
 #include "YamlConfigSegment.h"
 
